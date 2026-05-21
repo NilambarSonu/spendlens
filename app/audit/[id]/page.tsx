@@ -128,6 +128,17 @@ export default async function AuditPage({ params }: AuditPageProps) {
     );
   }
 
+  // If stored summary is truncated (too short / no ending punctuation), clear it so
+  // the client-side component triggers a fresh full-length Gemini generation.
+  function isSummaryComplete(s: string | null): boolean {
+    if (!s || s.trim().length < 150) return false;
+    const last = s.trim().slice(-1);
+    return ['.', '!', '?'].includes(last);
+  }
+
+  const storedSummary = audit.ai_summary;
+  const cleanSummary = isSummaryComplete(storedSummary) ? storedSummary : undefined;
+
   // Map database row to AuditResult type expected by AuditResults component
   const mappedResult = {
     id: audit.id,
@@ -141,8 +152,8 @@ export default async function AuditPage({ params }: AuditPageProps) {
     totalMonthlySpend: audit.total_monthly_spend,
     totalMonthlySavings: audit.total_monthly_savings,
     totalAnnualSavings: audit.total_annual_savings,
-    // Pass stored AI summary so the component doesn't re-fetch
-    aiSummary: audit.ai_summary || undefined,
+    // Only pass summary if it's complete — otherwise client will regenerate via Gemini
+    aiSummary: cleanSummary,
     createdAt: audit.created_at,
     isHighSavings: audit.total_monthly_savings > 500,
     isOptimal: audit.total_monthly_savings < 100,

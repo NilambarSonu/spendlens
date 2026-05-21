@@ -14,17 +14,30 @@ interface AuditResultsProps {
   onBackToForm?: () => void;
 }
 
+// A summary is "truncated" if it's too short or doesn't end with sentence-ending punctuation
+function isTruncated(s: string | undefined | null): boolean {
+  if (!s) return true;
+  const trimmed = s.trim();
+  if (trimmed.length < 150) return true;
+  const lastChar = trimmed[trimmed.length - 1];
+  return ![ '.', '!', '?' ].includes(lastChar);
+}
+
 export default function AuditResults({ result, onBackToForm }: AuditResultsProps) {
-  const [aiSummary, setAiSummary] = useState<string | null>(result.aiSummary || null);
-  const [loadingSummary, setLoadingSummary] = useState<boolean>(!result.aiSummary);
+  const needsRegen = isTruncated(result.aiSummary);
+  const [aiSummary, setAiSummary] = useState<string | null>(
+    needsRegen ? null : (result.aiSummary || null)
+  );
+  const [loadingSummary, setLoadingSummary] = useState<boolean>(needsRegen || !result.aiSummary);
   const [leadCaptured, setLeadCaptured] = useState<boolean>(false);
   const [isAnnual, setIsAnnual] = useState<boolean>(false);
   const [applyAnnualDiscount, setApplyAnnualDiscount] = useState<boolean>(true);
   const summaryFetchedRef = useRef(false);
 
-  // Fetch AI summary once on mount if not provided
+  // Fetch AI summary on mount if missing or truncated
   useEffect(() => {
-    if (result.aiSummary || summaryFetchedRef.current) return;
+    if (!needsRegen && result.aiSummary && !summaryFetchedRef.current) return;
+    if (summaryFetchedRef.current) return;
     
     const fetchSummary = async () => {
       summaryFetchedRef.current = true;
