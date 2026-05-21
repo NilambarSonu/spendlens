@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint-and-test:
+    name: Lint & Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: spendlens/package-lock.json
+
+      - name: Install dependencies
+        run: |
+          cd spendlens
+          npm ci
+
+      - name: Run TypeScript check
+        run: |
+          cd spendlens
+          npx tsc --noEmit
+
+      - name: Run ESLint
+        run: |
+          cd spendlens
+          npm run lint
+
+      - name: Run tests
+        run: |
+          cd spendlens
+          npm run test
+        env:
+          # Use dummy values for CI — tests should not need real API keys
+          NEXT_PUBLIC_SUPABASE_URL: https://placeholder.supabase.co
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: placeholder
+          SUPABASE_SERVICE_ROLE_KEY: placeholder
+          ANTHROPIC_API_KEY: placeholder
+          RESEND_API_KEY: placeholder
+          NEXT_PUBLIC_APP_URL: http://localhost:3000

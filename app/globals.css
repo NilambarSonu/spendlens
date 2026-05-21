@@ -1,0 +1,266 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Nunito:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap');
+
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'SacrificeDemo';
+  src: url('/fonts/SacrificeDemo-8Ox1B.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.font-tagline {
+  font-family: 'SacrificeDemo', sans-serif;
+}
+
+@theme {
+  --color-primary: #D946EF;    /* Fuchsia */
+  --color-accent: #22D3EE;     /* Cyan */
+  --color-tertiary: #FACC15;   /* Yellow */
+  --color-danger: #EF4444;     /* Red */
+  --color-warning: #F59E0B;    /* Amber */
+  --color-success: #22C55E;    /* Emerald */
+  --color-background-app: #09090b;
+  --color-card-app: #121214;
+  
+  --font-sans: var(--font-nunito), system-ui, -apple-system, sans-serif;
+  --font-display: var(--font-poppins), sans-serif;
+  --font-mono: var(--font-space-mono), monospace;
+}
+
+:root {
+  --font-poppins: 'Poppins', sans-serif;
+  --font-nunito: 'Nunito', sans-serif;
+  --font-space-mono: 'Space Mono', monospace;
+  --background: #09090b;
+  --foreground: #f4f4f5;
+  --primary: 217 70 239; /* D946EF */
+  --secondary: 34 211 238; /* 22D3EE */
+  --accent: 34 211 238;
+  --card: 18 18 20;
+  --border: 39 39 42;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-family: var(--font-nunito), sans-serif;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+/* ShopVibe Glassmorphism custom styling utilities */
+.glass-panel {
+  background: rgba(18, 18, 20, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-card {
+  background: rgba(18, 18, 20, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(63, 63, 70, 0.4);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  border-color: rgba(217, 70, 239, 0.5); /* Fuchsia tint */
+  box-shadow: 0 14px 32px rgba(217, 70, 239, 0.12), 0 6px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-3px);
+}
+
+/* Custom premium transitions and keyframes */
+@keyframes pulse-subtle {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: .95;
+    transform: scale(1.01);
+  }
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Custom glow element styling */
+.neon-glow-primary {
+  box-shadow: 0 0 50px rgba(217, 70, 239, 0.15);
+}
+
+.neon-glow-accent {
+  box-shadow: 0 0 50px rgba(34, 211, 238, 0.15);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #18181b;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3f3f46;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #52525b;
+}
+
+/* Premium 3D perspective tilt effects */
+.tilt-card {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.5s ease, border-color 0.5s ease;
+  will-change: transform;
+}
+.tilt-card:hover {
+  transform: rotateX(3deg) rotateY(3deg) translateY(-4px);
+  box-shadow: 0 20px 40px rgba(217, 70, 239, 0.12), 0 0 30px rgba(34, 211, 238, 0.08);
+  border-color: rgba(217, 70, 239, 0.5);
+}
+
+.tilt-card-reverse {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.5s ease, border-color 0.5s ease;
+  will-change: transform;
+}
+.tilt-card-reverse:hover {
+  transform: rotateX(-3deg) rotateY(-3deg) translateY(-4px);
+  box-shadow: 0 20px 40px rgba(34, 211, 238, 0.12), 0 0 30px rgba(217, 70, 239, 0.08);
+  border-color: rgba(34, 211, 238, 0.5);
+}
+
+/* Glow toggle styling */
+.toggle-glow {
+  box-shadow: 0 0 15px rgba(217, 70, 239, 0.4);
+}
+
+/* Premium Preloader keyframes and classes */
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-slide-up {
+  animation: slide-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.animate-spin-slow {
+  animation: spin-slow 12s linear infinite;
+}
+
+@keyframes float-particle {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateY(-20px) scale(1.1);
+    opacity: 0.6;
+  }
+}
+.animate-float-1 {
+  animation: float-particle 6s ease-in-out infinite;
+}
+.animate-float-2 {
+  animation: float-particle 8s ease-in-out infinite 2s;
+}
+.animate-float-3 {
+  animation: float-particle 10s ease-in-out infinite 4s;
+}
+
+@keyframes fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; pointer-events: none; }
+}
+.animate-fade-out {
+  animation: fade-out 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Premium 3D Wobble & Glow Preloader Animations */
+@keyframes logo-3d-wobble {
+  0% {
+    transform: rotateX(0deg) rotateY(0deg) rotate(45deg) scale(1);
+    box-shadow: 0 0 35px rgba(217, 70, 239, 0.55), 0 0 15px rgba(34, 211, 238, 0.35);
+    filter: hue-rotate(0deg);
+  }
+  25% {
+    transform: rotateX(15deg) rotateY(-15deg) rotate(48deg) scale(1.06);
+    box-shadow: 0 0 55px rgba(217, 70, 239, 0.85), 0 0 30px rgba(34, 211, 238, 0.6);
+  }
+  50% {
+    transform: rotateX(-12deg) rotateY(18deg) rotate(41deg) scale(0.96);
+    box-shadow: 0 0 35px rgba(34, 211, 238, 0.75), 0 0 15px rgba(217, 70, 239, 0.45);
+    filter: hue-rotate(180deg);
+  }
+  75% {
+    transform: rotateX(18deg) rotateY(12deg) rotate(47deg) scale(1.04);
+    box-shadow: 0 0 55px rgba(217, 70, 239, 0.85), 0 0 30px rgba(34, 211, 238, 0.6);
+  }
+  100% {
+    transform: rotateX(0deg) rotateY(0deg) rotate(45deg) scale(1);
+    box-shadow: 0 0 35px rgba(217, 70, 239, 0.55), 0 0 15px rgba(34, 211, 238, 0.35);
+    filter: hue-rotate(360deg);
+  }
+}
+.animate-logo-3d {
+  animation: logo-3d-wobble 3.5s ease-in-out infinite;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+@keyframes text-heartbeat {
+  0%, 100% {
+    transform: scale(1) translateZ(30px);
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.9), 0 0 30px rgba(217, 70, 239, 0.6);
+  }
+  50% {
+    transform: scale(1.18) translateZ(45px);
+    text-shadow: 0 0 25px rgba(255, 255, 255, 1), 0 0 45px rgba(34, 211, 238, 0.9);
+  }
+}
+.animate-text-heartbeat {
+  animation: text-heartbeat 1.75s ease-in-out infinite;
+}
+
+@keyframes spin-counter-clockwise {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+.animate-spin-counter-clockwise {
+  animation: spin-counter-clockwise 6s linear infinite;
+}
+
+
+
