@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
                   {
                     text: `You are a concise financial advisor specializing in AI tool spend optimization.
 
-Generate a 80-100 word personalized audit summary for this startup based on these facts:
+Generate a 150-180 word personalized audit summary for this startup based on these facts:
 
 Team size: ${auditData.teamSize || auditData.input?.teamSize} people
 Primary use case: ${auditData.primaryUseCase || auditData.input?.primaryUseCase}
@@ -43,17 +43,17 @@ Identified monthly savings: $${auditData.totalMonthlySavings}
 Key recommendations: ${(auditData.recommendations || [])
   .filter((r: { action: string }) => r.action !== 'keep')
   .map((r: { toolName: string; reasoning: string }) => `${r.toolName}: ${r.reasoning}`)
-  .slice(0, 3)
+  .slice(0, 4)
   .join('; ')}
 
-Write in second person ("your team", "you're paying"). Be specific about numbers. End with one forward-looking sentence. Do not use bullet points. Plain paragraph only. Keep it professional, premium, and actionable. Do not add markdown styles or bold markers like ** inside the text, just plain text.`
+Write in second person ("your team", "you're paying"). Be specific with dollar amounts and tool names. Explain the biggest saving opportunity clearly. End with one forward-looking sentence about what this saves annually. Do not use bullet points or markdown. Plain paragraph text only. No bold markers like ** in the text.`
                   }
                 ]
               }
             ],
             generationConfig: {
-              maxOutputTokens: 150,
-              temperature: 0.2
+              maxOutputTokens: 400,
+              temperature: 0.3
             }
           })
         });
