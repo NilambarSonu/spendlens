@@ -454,7 +454,7 @@ export default function AuditResults({ result, onBackToForm }: AuditResultsProps
       <GlassCard glowColor="fuchsia" className="md:p-8 relative overflow-hidden">
         <div className="absolute right-0 bottom-0 translate-y-8 translate-x-8 w-40 h-40 bg-[#D946EF]/5 rounded-full blur-2xl pointer-events-none" />
         <h4 className="text-xs font-mono font-bold text-[#D946EF] uppercase tracking-wider mb-3">
-          🤖 Claude AI Analysis Summary
+          ✨ Gemini AI Analysis Summary
         </h4>
 
         {loadingSummary ? (
