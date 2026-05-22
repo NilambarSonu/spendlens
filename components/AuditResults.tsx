@@ -30,7 +30,20 @@ export default function AuditResults({ result, onBackToForm }: AuditResultsProps
   const [loadingSummary, setLoadingSummary] = useState<boolean>(needsRegen || !result.aiSummary);
   const [isAnnual, setIsAnnual] = useState<boolean>(false);
   const [applyAnnualDiscount, setApplyAnnualDiscount] = useState<boolean>(true);
+  const [currency, setCurrency] = useState<'USD' | 'EUR' | 'INR' | 'GBP'>('USD');
   const summaryFetchedRef = useRef(false);
+
+  const CURRENCIES = {
+    USD: { symbol: '$', rate: 1.0, label: 'USD ($)' },
+    EUR: { symbol: '€', rate: 0.92, label: 'EUR (€)' },
+    INR: { symbol: '₹', rate: 83.0, label: 'INR (₹)' },
+    GBP: { symbol: '£', rate: 0.79, label: 'GBP (£)' }
+  };
+
+  const formatPrice = (amount: number) => {
+    const cfg = CURRENCIES[currency];
+    return `${cfg.symbol}${Math.round(amount * cfg.rate).toLocaleString()}`;
+  };
 
   // Fetch AI summary on mount if missing or truncated
   useEffect(() => {
@@ -234,30 +247,51 @@ export default function AuditResults({ result, onBackToForm }: AuditResultsProps
       </div>
 
       {/* Dynamic Billing Controller Capsule */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-[#121214]/65 backdrop-blur-xl p-5 rounded-3xl border border-zinc-800/80 shadow-md">
-        <div className="flex items-center gap-3">
-          <span className="text-xs font-bold text-zinc-400 uppercase tracking-widest font-mono">
-            📅 Billing terms
-          </span>
-          <div className="relative inline-flex items-center bg-zinc-950 p-1 rounded-full border border-zinc-800/80">
-            <button
-              type="button"
-              onClick={() => setIsAnnual(false)}
-              className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all duration-300 cursor-pointer ${
-                !isAnnual ? 'bg-[#D946EF] text-white shadow-lg toggle-glow' : 'text-zinc-550 hover:text-zinc-300'
-              }`}
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 bg-[#121214]/65 backdrop-blur-xl p-5 rounded-3xl border border-zinc-800/80 shadow-md">
+        <div className="flex flex-wrap items-center gap-6">
+          {/* Billing Terms Toggle */}
+          <div className="flex items-center gap-3">
+            <span className="text-xs font-bold text-zinc-400 uppercase tracking-widest font-mono">
+              📅 Billing terms
+            </span>
+            <div className="relative inline-flex items-center bg-zinc-950 p-1 rounded-full border border-zinc-800/80">
+              <button
+                type="button"
+                onClick={() => setIsAnnual(false)}
+                className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all duration-300 cursor-pointer ${
+                  !isAnnual ? 'bg-[#D946EF] text-white shadow-lg toggle-glow' : 'text-zinc-550 hover:text-zinc-300'
+                }`}
+              >
+                Monthly
+              </button>
+              <button
+                type="button"
+                onClick={() => setIsAnnual(true)}
+                className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all duration-300 cursor-pointer ${
+                  isAnnual ? 'bg-[#D946EF] text-white shadow-lg toggle-glow' : 'text-zinc-550 hover:text-zinc-300'
+                }`}
+              >
+                Annual
+              </button>
+            </div>
+          </div>
+
+          {/* Currency Switcher Dropdown */}
+          <div className="flex items-center gap-3">
+            <span className="text-xs font-bold text-zinc-400 uppercase tracking-widest font-mono">
+              🪙 Currency
+            </span>
+            <select
+              value={currency}
+              onChange={(e) => setCurrency(e.target.value as 'USD' | 'EUR' | 'INR' | 'GBP')}
+              className="bg-zinc-950 border border-zinc-800 rounded-full px-3 py-1.5 text-xs font-bold text-zinc-300 hover:text-white transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-primary/45"
             >
-              Monthly
-            </button>
-            <button
-              type="button"
-              onClick={() => setIsAnnual(true)}
-              className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all duration-300 cursor-pointer ${
-                isAnnual ? 'bg-[#D946EF] text-white shadow-lg toggle-glow' : 'text-zinc-550 hover:text-zinc-300'
-              }`}
-            >
-              Annual
-            </button>
+              {Object.entries(CURRENCIES).map(([key, cfg]) => (
+                <option key={key} value={key} className="bg-[#121214] text-zinc-300">
+                  {cfg.label}
+                </option>
+              ))}
+            </select>
           </div>
         </div>
 
@@ -293,6 +327,8 @@ export default function AuditResults({ result, onBackToForm }: AuditResultsProps
         annualSavings={isAnnual ? displayTotalSavings : displayTotalSavings * 12}
         totalSpend={isAnnual ? displayTotalSpend / 12 : displayTotalSpend}
         isOptimal={result.isOptimal}
+        currencySymbol={CURRENCIES[currency].symbol}
+        currencyRate={CURRENCIES[currency].rate}
       />
 
       {/* 3D Visual Budget Impact Analyser Graph */}
@@ -308,7 +344,7 @@ export default function AuditResults({ result, onBackToForm }: AuditResultsProps
             <div className="space-y-1.5">
               <div className="flex justify-between text-xs font-semibold text-zinc-300 font-sans">
                 <span>Current Stack Spend</span>
-                <span className="font-mono text-zinc-400">${Math.round(displayTotalSpend)}{isAnnual ? '/yr' : '/mo'}</span>
+                <span className="font-mono text-zinc-400">{formatPrice(displayTotalSpend)}{isAnnual ? '/yr' : '/mo'}</span>
               </div>
               <div className="h-4 bg-zinc-950 rounded-full overflow-hidden border border-zinc-800/60 relative">
                 <div
@@ -322,7 +358,7 @@ export default function AuditResults({ result, onBackToForm }: AuditResultsProps
             <div className="space-y-1.5">
               <div className="flex justify-between text-xs font-semibold text-zinc-300 font-sans">
                 <span>Optimized Spend (Plan adjustments)</span>
-                <span className="font-mono text-[#22D3EE]">${Math.round(displayProjectedSpend)}{isAnnual ? '/yr' : '/mo'}</span>
+                <span className="font-mono text-[#22D3EE]">{formatPrice(displayProjectedSpend)}{isAnnual ? '/yr' : '/mo'}</span>
               </div>
               <div className="h-4 bg-zinc-950 rounded-full overflow-hidden border border-zinc-800/60 relative">
                 <div
@@ -338,7 +374,7 @@ export default function AuditResults({ result, onBackToForm }: AuditResultsProps
                 <span className="flex items-center gap-1.5">
                   Reclaimed Budget <span className="text-[10px] bg-emerald-950/80 text-emerald-400 border border-emerald-900/40 px-2 py-0.5 rounded-full uppercase tracking-wider font-mono font-bold">{savingsPercentage}% Saved</span>
                 </span>
-                <span className="font-mono text-[#22C55E]">+${Math.round(displayTotalSavings)}{isAnnual ? '/yr' : '/mo'} ✨</span>
+                <span className="font-mono text-[#22C55E]">+{formatPrice(displayTotalSavings)}{isAnnual ? '/yr' : '/mo'} ✨</span>
               </div>
               <div className="h-4 bg-zinc-950 rounded-full overflow-hidden border border-zinc-800/60 relative">
                 <div
@@ -434,11 +470,11 @@ export default function AuditResults({ result, onBackToForm }: AuditResultsProps
                         {isAnnual ? 'Annual Savings' : 'Monthly Savings'}
                       </p>
                       <p className="text-2xl font-black text-[#22D3EE] font-sans">
-                        ${Math.round(recSavings)}
+                        {formatPrice(recSavings)}
                         <span className="text-xs font-normal text-zinc-500">/{isAnnual ? 'yr' : 'mo'}</span>
                       </p>
                       <p className="text-[10px] font-mono text-zinc-500 font-medium mt-1">
-                        {isAnnual ? `paying: $${Math.round(recProj)}/yr` : `paying: $${Math.round(recProj)}/mo`}
+                        paying: {formatPrice(recProj)}/{isAnnual ? 'yr' : 'mo'}
                       </p>
                     </>
                   ) : (
@@ -450,7 +486,7 @@ export default function AuditResults({ result, onBackToForm }: AuditResultsProps
                         Optimal Spend
                       </p>
                       <p className="text-[10px] font-mono text-zinc-500 font-medium mt-1">
-                        paying: ${Math.round(recSpend)}/{isAnnual ? 'yr' : 'mo'}
+                        paying: {formatPrice(recSpend)}/{isAnnual ? 'yr' : 'mo'}
                       </p>
                     </>
                   )}

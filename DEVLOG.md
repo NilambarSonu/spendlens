@@ -15,12 +15,14 @@ This log records the daily progression of the SpendLens internship project, cove
 
 ---
 
-## Day 2: Models & Core Pricing Data Catalog (May 22, 2026)
-- **Goal**: Populate the verified pricing data arrays for all 8 target AI tools.
+## Day 2: Models, Core Pricing Data Catalog, & Multi-Currency Switcher (May 22, 2026)
+- **Goal**: Populate verified pricing catalog and implement interactive multi-currency capabilities.
 - **Achievements**:
   - Implemented typescript models inside `types/index.ts` defining structures for `ToolEntry`, `Plan`, `ToolDefinition`, `ToolRecommendation`, and `AuditResult`.
   - Built `lib/pricing-data.ts` cataloging verified plan features, per-seat pricing, and team metrics for Cursor, GitHub Copilot, Claude, ChatGPT, Anthropic API, OpenAI API, Gemini, and Windsurf.
-- **Technical Insight**: Discovered that OpenAI ChatGPT Enterprise plans do not have public standard pricing. Factored a realistic estimated team average pricing of $60/seat with proper notes, verifying matching benchmarks.
+  - Coded an elegant, interactive glassmorphic Multi-Currency Selector supporting USD ($), EUR (€), INR (₹), and GBP (£) with real-time conversion rates.
+  - Localized all display elements, including the dynamic `<SavingsHero>` stats, the 3D Visual Budget Impact Analyser Graph, and individual per-tool recommendation breakdowns.
+- **Technical Insight**: Ensured no type assertion leaks (`any`) by casting option updates to a strict union type, keeping ESLint lints 100% clean and passing the full suite of Vitest unit tests.
 
 ---
 
