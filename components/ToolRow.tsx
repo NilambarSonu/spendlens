@@ -83,6 +83,7 @@ export default function ToolRow({
         });
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Map tools definition into select options

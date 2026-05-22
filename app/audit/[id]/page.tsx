@@ -3,6 +3,7 @@ import { Metadata } from 'next';
 import { query } from '@/lib/db';
 import AuditResults from '@/components/AuditResults';
 import Link from 'next/link';
+import { UseCase, ToolEntry, ToolRecommendation } from '@/types';
 
 interface AuditPageProps {
   params: Promise<{ id: string }> | { id: string };
@@ -145,10 +146,10 @@ export default async function AuditPage({ params }: AuditPageProps) {
     publicToken: audit.public_token,
     input: {
       teamSize: audit.team_size,
-      primaryUseCase: audit.primary_use_case as any,
-      tools: audit.tools as any[],
+      primaryUseCase: audit.primary_use_case as UseCase,
+      tools: audit.tools as ToolEntry[],
     },
-    recommendations: audit.recommendations as any[],
+    recommendations: audit.recommendations as ToolRecommendation[],
     totalMonthlySpend: audit.total_monthly_spend,
     totalMonthlySavings: audit.total_monthly_savings,
     totalAnnualSavings: audit.total_annual_savings,

@@ -11,13 +11,6 @@ interface AuditFormProps {
   isLoading: boolean;
 }
 
-const DEFAULT_ENTRY: ToolEntry = {
-  toolId: 'cursor',
-  planId: 'pro',
-  monthlySpend: 20,
-  seats: 1,
-};
-
 export default function AuditForm({ onSubmit, isLoading }: AuditFormProps) {
   const [teamSize, setTeamSize] = useState<number>(3);
   const [primaryUseCase, setPrimaryUseCase] = useState<UseCase>('mixed');
@@ -26,18 +19,21 @@ export default function AuditForm({ onSubmit, isLoading }: AuditFormProps) {
   ]);
   const [website, setWebsite] = useState<string>(''); // Honeypot field
   const [error, setError] = useState<string | null>(null);
-
+ 
   // Restore form state from localStorage on mount
   useEffect(() => {
     try {
       const saved = localStorage.getItem('spendlens_form_state');
       if (saved) {
         const parsed = JSON.parse(saved);
-        if (parsed.teamSize) setTeamSize(parsed.teamSize);
-        if (parsed.primaryUseCase) setPrimaryUseCase(parsed.primaryUseCase);
-        if (parsed.tools && Array.isArray(parsed.tools) && parsed.tools.length > 0) {
-          setTools(parsed.tools);
-        }
+        const timer = setTimeout(() => {
+          if (parsed.teamSize) setTeamSize(parsed.teamSize);
+          if (parsed.primaryUseCase) setPrimaryUseCase(parsed.primaryUseCase);
+          if (parsed.tools && Array.isArray(parsed.tools) && parsed.tools.length > 0) {
+            setTools(parsed.tools);
+          }
+        }, 0);
+        return () => clearTimeout(timer);
       }
     } catch (e) {
       console.warn('Failed to restore form state from localStorage:', e);
@@ -198,7 +194,7 @@ export default function AuditForm({ onSubmit, isLoading }: AuditFormProps) {
         {/* Primary Use Case */}
         <GlassCard glowColor="cyan" className="md:col-span-8 flex flex-col gap-2.5">
           <span className="text-sm font-semibold text-zinc-300 font-sans">
-            🎯 What is your team's primary AI use case?
+            🎯 What is your team&apos;s primary AI use case?
           </span>
           <p className="text-xs text-zinc-550 font-sans">
             Helps verify if tools match your actual workflow capability needs.

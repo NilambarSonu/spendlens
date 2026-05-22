@@ -27,7 +27,19 @@ export async function GET(req: NextRequest) {
       [session.userId, session.email]
     );
 
-    const audits = res.rows.map((row: any) => ({
+    interface AuditRow {
+      id: string;
+      public_token: string;
+      created_at: string;
+      team_size: number;
+      primary_use_case: string;
+      total_monthly_spend: string | number;
+      total_monthly_savings: string | number;
+      total_annual_savings: string | number;
+      ai_summary: string | null;
+    }
+
+    const audits = (res.rows as AuditRow[]).map((row) => ({
       id: row.id,
       publicToken: row.public_token,
       createdAt: row.created_at,
@@ -40,8 +52,9 @@ export async function GET(req: NextRequest) {
     }));
 
     return NextResponse.json({ audits });
-  } catch (err: any) {
+  } catch (err) {
     console.error('Fetch user audits error:', err);
-    return NextResponse.json({ error: 'Failed to retrieve audits', details: err.message }, { status: 500 });
+    const message = err instanceof Error ? err.message : 'Unknown error';
+    return NextResponse.json({ error: 'Failed to retrieve audits', details: message }, { status: 500 });
   }
 }

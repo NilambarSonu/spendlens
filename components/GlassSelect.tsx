@@ -51,13 +51,17 @@ export default function GlassSelect({
   // Reset search when opening/closing
   useEffect(() => {
     if (!isOpen) {
-      setSearch('');
-      setActiveIndex(-1);
+      const timer = setTimeout(() => {
+        setSearch('');
+        setActiveIndex(-1);
+      }, 0);
+      return () => clearTimeout(timer);
     } else {
       // Focus search input on open
-      setTimeout(() => {
+      const timer = setTimeout(() => {
         searchInputRef.current?.focus();
       }, 50);
+      return () => clearTimeout(timer);
     }
   }, [isOpen]);
 

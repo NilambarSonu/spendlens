@@ -7,6 +7,13 @@ import AuditResults from '@/components/AuditResults';
 import Preloader from '@/components/Preloader';
 import AuthModal from '@/components/AuthModal';
 
+interface UserProfile {
+  id: string;
+  email: string;
+  companyName?: string | null;
+  role?: string | null;
+}
+
 export default function Home() {
   const [step, setStep] = useState<'form' | 'results'>('form');
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -18,7 +25,7 @@ export default function Home() {
 
   // Authentication states
   const [isAuthModalOpen, setIsAuthModalOpen] = useState<boolean>(false);
-  const [currentUser, setCurrentUser] = useState<any>(null);
+  const [currentUser, setCurrentUser] = useState<UserProfile | null>(null);
 
   // Check user session on mount
   useEffect(() => {
@@ -80,9 +87,10 @@ export default function Home() {
       
       // Scroll to top of results smoothly
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    } catch (err: any) {
+    } catch (err) {
       console.error('Audit calculation error:', err);
-      setError(err.message || 'Failed to execute audit. Please check your network and try again.');
+      const message = err instanceof Error ? err.message : 'Failed to execute audit. Please check your network and try again.';
+      setError(message);
     } finally {
       setIsLoading(false);
     }
@@ -113,6 +121,7 @@ export default function Home() {
         <header className="bg-[#09090b]/85 backdrop-blur-lg border-b border-zinc-800/60 py-4 px-6 md:px-12 sticky top-0 z-50">
           <div className="max-w-6xl mx-auto flex items-center justify-between">
             <div className="flex items-center gap-3">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img 
                 src="/favicon.png" 
                 alt="SpendLens Logo" 

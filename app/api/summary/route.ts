@@ -68,7 +68,7 @@ Write in second person ("your team", "you're paying"). Be specific with dollar a
           console.error(`[Gemini AI Summary] Gemini API returned error after ${duration}ms:`, JSON.stringify(data));
           summary = generateFallbackSummary(auditData);
         }
-      } catch (err: any) {
+      } catch (err) {
         const duration = Date.now() - startTime;
         console.error(`[Gemini AI Summary] Gemini API runtime error after ${duration}ms. Returning fallback:`, err);
         summary = generateFallbackSummary(auditData);
@@ -94,7 +94,18 @@ Write in second person ("your team", "you're paying"). Be specific with dollar a
   }
 }
 
-function generateFallbackSummary(auditData: Record<string, any>): string {
+interface AuditSummaryInput {
+  totalMonthlySavings?: number;
+  totalMonthlySpend?: number;
+  teamSize?: number;
+  primaryUseCase?: string;
+  input?: {
+    teamSize?: number;
+    primaryUseCase?: string;
+  };
+}
+
+function generateFallbackSummary(auditData: AuditSummaryInput): string {
   const savings = (auditData.totalMonthlySavings ?? 0) as number;
   const spend = (auditData.totalMonthlySpend ?? 0) as number;
   const teamSize = (auditData.teamSize ?? auditData.input?.teamSize ?? 1) as number;

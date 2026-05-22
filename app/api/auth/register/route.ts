@@ -79,10 +79,11 @@ export async function POST(req: NextRequest) {
     const duration = Date.now() - startTime;
     console.log(`[Auth Register] Registration completed successfully in ${duration}ms!`);
     return response;
-  } catch (err: any) {
+  } catch (err) {
     const duration = Date.now() - startTime;
     console.error(`[Auth Register] Registration failed after ${duration}ms with exception:`, err);
-    return NextResponse.json({ error: 'Registration failed', details: err.message }, { status: 500 });
+    const message = err instanceof Error ? err.message : 'Unknown error';
+    return NextResponse.json({ error: 'Registration failed', details: message }, { status: 500 });
   }
 }
 

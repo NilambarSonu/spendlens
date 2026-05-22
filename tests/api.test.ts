@@ -1,5 +1,6 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { runAudit } from '@/lib/audit-engine';
+import { AuditInput } from '@/types';
 
 // Mock simple API route handler logic
 describe('API Ingestion Logic & Validations', () => {
@@ -7,8 +8,8 @@ describe('API Ingestion Logic & Validations', () => {
     const validBody = {
       input: {
         teamSize: 3,
-        primaryUseCase: 'coding',
-        tools: [{ toolId: 'cursor', planId: 'pro', monthlySpend: 60, seats: 3 }]
+        primaryUseCase: 'coding' as const,
+        tools: [{ toolId: 'cursor' as const, planId: 'pro', monthlySpend: 60, seats: 3 }]
       }
     };
 
@@ -20,7 +21,7 @@ describe('API Ingestion Logic & Validations', () => {
     };
 
     // Verify valid input parses successfully through audit calculations
-    const result = runAudit(validBody.input as any);
+    const result = runAudit(validBody.input as unknown as AuditInput);
     expect(result.totalMonthlySpend).toBe(60);
     expect(result.recommendations.length).toBe(1);
 
@@ -43,8 +44,15 @@ describe('API Ingestion Logic & Validations', () => {
   });
 
   it('verifies AI summary fallback mechanism matches expectations', () => {
+    interface MockAuditData {
+      totalMonthlySavings: number;
+      totalMonthlySpend: number;
+      teamSize: number;
+      primaryUseCase: string;
+    }
+
     // Standard mock fallback summary function matching app/api/summary/route.ts
-    function getFallbackSummary(auditData: any): string {
+    function getFallbackSummary(auditData: MockAuditData): string {
       const savings = auditData.totalMonthlySavings;
       const spend = auditData.totalMonthlySpend;
       const teamSize = auditData.teamSize;

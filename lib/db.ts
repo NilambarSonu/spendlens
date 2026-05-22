@@ -30,7 +30,7 @@ export function getDbPool() {
   return globalForDb.dbPool;
 }
 
-export async function query(text: string, params?: any[]) {
+export async function query(text: string, params?: unknown[]) {
   const dbPool = getDbPool();
   return dbPool.query(text, params);
 }

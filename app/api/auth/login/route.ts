@@ -61,10 +61,11 @@ export async function POST(req: NextRequest) {
     const duration = Date.now() - startTime;
     console.log(`[Auth Login] Login completed successfully in ${duration}ms!`);
     return response;
-  } catch (err: any) {
+  } catch (err) {
     const duration = Date.now() - startTime;
     console.error(`[Auth Login] Login failed after ${duration}ms with exception:`, err);
-    return NextResponse.json({ error: 'Login failed', details: err.message }, { status: 500 });
+    const message = err instanceof Error ? err.message : 'Unknown error';
+    return NextResponse.json({ error: 'Login failed', details: message }, { status: 500 });
   }
 }
 

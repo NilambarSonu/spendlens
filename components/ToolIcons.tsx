@@ -1,11 +1,6 @@
 import React from 'react';
 import type { ToolId } from '@/types';
 
-interface IconProps extends React.SVGProps<SVGSVGElement> {
-  className?: string;
-  size?: number;
-}
-
 export function ToolIcon({ toolId, className = '', size = 20, ...props }: { toolId: ToolId; className?: string; size?: number }) {
   const commonProps = {
     className: `shrink-0 transition-transform duration-300 ${className}`,

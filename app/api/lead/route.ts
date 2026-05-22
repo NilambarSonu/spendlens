@@ -82,7 +82,7 @@ export async function POST(req: NextRequest) {
         const emailResult = await resend.emails.send({
           from: `SpendLens <${fromEmail}>`,
           to: email,
-          subject: `💰 You could save $${totalMonthlySavings}/mo on AI tools — SpendLens Report`,
+          subject: `💰 Save $${totalMonthlySavings}/mo on your ${primaryUseCase} AI stack — SpendLens Report`,
           html: `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -149,7 +149,7 @@ export async function POST(req: NextRequest) {
                 Hi${companyName ? ` from <strong style="color:#c084fc;">${companyName}</strong>` : ''},
               </p>
               <p style="margin:0 0 20px;font-size:16px;color:#d1d5db;line-height:1.7;">
-                SpendLens has analyzed your AI tool subscriptions and found 
+                SpendLens has analyzed the AI tool subscriptions for your team of <strong>${teamSize}</strong> and found 
                 <strong style="color:#c084fc;">$${totalMonthlySavings.toFixed(0)}/month</strong> in optimization opportunities — 
                 that's <strong style="color:#22d3ee;">$${totalAnnualSavings.toFixed(0)}/year</strong> you could redirect toward growth.
               </p>
@@ -218,9 +218,10 @@ export async function POST(req: NextRequest) {
         });
 
         console.log(`[Resend] Email dispatched successfully! ID: ${emailResult?.data?.id}`);
-      } catch (emailErr: any) {
+      } catch (emailErr) {
         // Log the error but don't fail the whole request
-        console.error('[Resend] Email send failed:', emailErr?.message || emailErr);
+        const message = emailErr instanceof Error ? emailErr.message : 'Unknown error';
+        console.error('[Resend] Email send failed:', message);
       }
     }
 

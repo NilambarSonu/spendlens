@@ -6,7 +6,6 @@ import SavingsHero from './SavingsHero';
 import LeadCapture from './LeadCapture';
 import ShareCard from './ShareCard';
 import { ToolIcon } from './ToolIcons';
-import { TOOL_DEFINITIONS } from '@/lib/pricing-data';
 import GlassCard from './GlassCard';
 
 interface AuditResultsProps {
@@ -29,7 +28,6 @@ export default function AuditResults({ result, onBackToForm }: AuditResultsProps
     needsRegen ? null : (result.aiSummary || null)
   );
   const [loadingSummary, setLoadingSummary] = useState<boolean>(needsRegen || !result.aiSummary);
-  const [leadCaptured, setLeadCaptured] = useState<boolean>(false);
   const [isAnnual, setIsAnnual] = useState<boolean>(false);
   const [applyAnnualDiscount, setApplyAnnualDiscount] = useState<boolean>(true);
   const summaryFetchedRef = useRef(false);
@@ -89,7 +87,7 @@ export default function AuditResults({ result, onBackToForm }: AuditResultsProps
     };
 
     fetchSummary();
-  }, [result]);
+  }, [result, needsRegen]);
 
   const getActionStyles = (action: string) => {
     switch (action) {
@@ -489,7 +487,7 @@ export default function AuditResults({ result, onBackToForm }: AuditResultsProps
           auditId={result.id}
           publicToken={result.publicToken}
           totalMonthlySavings={result.totalMonthlySavings}
-          onSuccess={() => setLeadCaptured(true)}
+          onSuccess={() => {}}
         />
         <ShareCard
           publicToken={result.publicToken}

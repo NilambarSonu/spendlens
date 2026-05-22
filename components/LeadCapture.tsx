@@ -52,9 +52,10 @@ export default function LeadCapture({
 
       setSuccess(true);
       onSuccess();
-    } catch (err: any) {
+    } catch (err) {
+      const errorMsg = err instanceof Error ? err.message : 'Something went wrong. Please try again.';
       console.error('Lead Capture submission error:', err);
-      setError(err.message || 'Something went wrong. Please try again.');
+      setError(errorMsg);
     } finally {
       setIsLoading(false);
     }
@@ -89,7 +90,7 @@ export default function LeadCapture({
         <span>📬</span> Save Your Custom Savings Report
       </h3>
       <p className="text-sm text-zinc-500 mb-6 font-sans leading-relaxed">
-        Enter your details to save your audit, receive optimization notifications when tool list prices drop, and get this audit via email.
+        Enter your details to save your <strong className="text-emerald-400">${totalMonthlySavings}/mo</strong> savings report, receive optimization notifications when tool list prices drop, and get this audit via email.
       </p>
 
       <form onSubmit={handleSubmit} className="space-y-4">

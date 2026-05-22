@@ -104,9 +104,10 @@ export async function POST(req: NextRequest) {
       publicToken: row.public_token,
       result: auditResult,
     });
-  } catch (err: any) {
+  } catch (err) {
     console.error('Audit creation error:', err);
-    return NextResponse.json({ error: 'Internal server error', details: err.message }, { status: 500 });
+    const message = err instanceof Error ? err.message : 'Unknown error';
+    return NextResponse.json({ error: 'Internal server error', details: message }, { status: 500 });
   }
 }
 
@@ -190,8 +191,9 @@ export async function GET(req: NextRequest) {
     };
 
     return NextResponse.json({ audit: auditData });
-  } catch (err: any) {
+  } catch (err) {
     console.error('Audit get error:', err);
-    return NextResponse.json({ error: 'Internal server error', details: err.message }, { status: 500 });
+    const message = err instanceof Error ? err.message : 'Unknown error';
+    return NextResponse.json({ error: 'Internal server error', details: message }, { status: 500 });
   }
 }

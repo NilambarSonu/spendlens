@@ -1,12 +1,28 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import GlassCard from './GlassCard';
+
+interface UserProfile {
+  id: string;
+  email: string;
+  companyName?: string | null;
+  role?: string | null;
+}
+
+interface AuditHistoryItem {
+  id: string;
+  publicToken: string;
+  primaryUseCase: string;
+  teamSize: number;
+  createdAt: string;
+  totalMonthlySpend: number;
+  totalMonthlySavings: number;
+}
 
 interface AuthModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onLoginSuccess: (user: any) => void;
+  onLoginSuccess: (user: UserProfile) => void;
 }
 
 export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModalProps) {
@@ -17,14 +33,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
   const [role, setRole] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [myAudits, setMyAudits] = useState<any[]>([]);
-
-  // Fetch past audits if authenticated and in history tab
-  useEffect(() => {
-    if (mode === 'history') {
-      fetchMyAudits();
-    }
-  }, [mode]);
+  const [myAudits, setMyAudits] = useState<AuditHistoryItem[]>([]);
 
   const fetchMyAudits = async () => {
     setIsLoading(true);
@@ -42,6 +51,16 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
       setIsLoading(false);
     }
   };
+
+  // Fetch past audits if authenticated and in history tab
+  useEffect(() => {
+    if (mode === 'history') {
+      const timer = setTimeout(() => {
+        fetchMyAudits();
+      }, 0);
+      return () => clearTimeout(timer);
+    }
+  }, [mode]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
