@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
       console.log('[Gemini AI Summary] Requesting live synthesis from Google Gemini API (gemini-2.5-flash)...');
       
       try {
-        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
         
         const response = await fetch(url, {
           method: 'POST',
@@ -52,7 +52,7 @@ Write in second person ("your team", "you're paying"). Be specific with dollar a
               }
             ],
             generationConfig: {
-              maxOutputTokens: 400,
+              maxOutputTokens: 1024,
               temperature: 0.3
             }
           })

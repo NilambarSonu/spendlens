@@ -69,3 +69,11 @@ This log records the daily progression of the SpendLens internship project, cove
   - Validated all 13 test scenarios in Vitest, resolving any mock response constraints.
   - Ran `npm run build` validating production compilation. Resolved a minor dynamic dynamic SSR route mismatch by adjusting URL checks.
   - Finalized GTM, economics, metrics, and prompts markdown specifications. Prepared the repository for review.
+# Day 8: Summary Model Upgrade & Email Enhancement (May 28, 2026)
+- **Goal**: Switch Gemini model to 1.5-flash with higher token limit and include AI summary in lead capture email.
+- **Achievements**:
+  - Updated `/api/summary` route to use gemini-1.5-flash and maxOutputTokens 1024.
+  - Added truncation detection in frontend components for reliable regeneration.
+  - Extended lead email to embed generated AI summary when available.
+  - Added unit test for Windsurf pricing edge cases.
+  - Ensured daily commit strategy compliance.

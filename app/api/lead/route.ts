@@ -28,6 +28,7 @@ export async function POST(req: NextRequest) {
     let totalAnnualSavings = 0;
     let teamSize = 1;
     let primaryUseCase = 'general';
+    let aiSummary = '';
 
     const hasDb = !!process.env.DATABASE_URL;
 
@@ -41,7 +42,7 @@ export async function POST(req: NextRequest) {
              role = $3, 
              lead_captured_at = $4 
            WHERE id = $5 
-           RETURNING total_monthly_savings, total_annual_savings, team_size, primary_use_case`,
+           RETURNING total_monthly_savings, total_annual_savings, team_size, primary_use_case, ai_summary`,
           [email, companyName || null, role || null, new Date(), auditId]
         );
 
@@ -54,6 +55,7 @@ export async function POST(req: NextRequest) {
         totalAnnualSavings = Number(row.total_annual_savings);
         teamSize = Number(row.team_size);
         primaryUseCase = row.primary_use_case;
+        aiSummary = row.ai_summary;
       } catch (dbErr) {
         console.error('DB update error in lead capture:', dbErr);
       }
@@ -151,6 +153,9 @@ export async function POST(req: NextRequest) {
                 <strong style="color:#c084fc;">$${totalMonthlySavings.toFixed(0)}/month</strong> in optimization opportunities — 
                 that's <strong style="color:#22d3ee;">$${totalAnnualSavings.toFixed(0)}/year</strong> you could redirect toward growth.
               </p>
+              ${aiSummary ? `<p style="margin:0 0 20px;font-size:16px;color:#d1d5db;line-height:1.7;background:#1a1a24;padding:15px;border-radius:8px;border-left:4px solid #a855f7;">
+                ${aiSummary}
+              </p>` : ''}
               <p style="margin:0 0 28px;font-size:16px;color:#9ca3af;line-height:1.7;">
                 Your full breakdown — including per-tool recommendations, confidence scores, and projected savings — is waiting for you:
               </p>
