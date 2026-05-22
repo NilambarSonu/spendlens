@@ -4,8 +4,7 @@ Free web app that audits startup AI tool subscriptions and surfaces overspending
 
 **Who it's for:** Startup founders and engineering managers paying $200+/month across AI tools who have no way to benchmark their spend.
 
-🚀 **Live:** https://spendlens.vercel.app
-
+🚀 **Live:** https://spendlens.nilambarsonu.me
 ## Features
 
 - **Interactive Multi-Tool Audit Form**: Add/remove multiple tools, configure seat count, monthly spend, and plans.
