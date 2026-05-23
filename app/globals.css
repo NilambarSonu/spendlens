@@ -262,5 +262,14 @@ body {
   animation: spin-counter-clockwise 6s linear infinite;
 }
 
+/* Glass Button neon breathing accent outline */
+.glass-button-glow {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.glass-button-glow:hover {
+  box-shadow: 0 0 20px rgba(34, 211, 238, 0.35), inset 0 0 10px rgba(34, 211, 238, 0.2);
+  border-color: rgba(34, 211, 238, 0.7);
+}
+
 
 

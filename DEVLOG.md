@@ -26,12 +26,14 @@ This log records the daily progression of the SpendLens internship project, cove
 
 ---
 
-## Day 3: Deterministic Audit Engine & Test Scenarios (May 23, 2026)
-- **Goal**: Build the offline rules engine and establish early test coverage with Vitest.
+## Day 3: Deterministic Audit Engine & Test Scenarios & Glassmorphic Highlights (May 23, 2026)
+- **Goal**: Build the offline rules engine, establish early test coverage with Vitest, and optimize dashboard layout styles.
 - **Achievements**:
   - Designed the core deterministic rules inside `lib/audit-engine.ts`.
   - Coded dedicated spend evaluation criteria: tiny-team downgrades from Team/Business plans, list-price discrepancy adjustments, Cursor-to-Claude conversions for non-technical clients, ChatGPT Enterprise downgrades for <50 seats, and general overlapping service redundancy detectors (paying for both Claude Pro and ChatGPT Plus).
   - Established unit test suite under `tests/audit-engine.test.ts` and `tests/pricing-data.test.ts`. Verified all tests passing locally with green metrics.
+  - Tweaked style definitions inside `app/globals.css` to add the `.glass-button-glow` class, delivering premium breathing neon outlines to critical interactive buttons.
+- **Technical Insight**: Utilized pure CSS variables to ensure high performance transitions, maintaining full compatibility with Next.js fast refresh without causing frame rendering lags.
 
 ---
 

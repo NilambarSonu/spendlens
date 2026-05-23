@@ -230,7 +230,7 @@ export default function AuditResults({ result, onBackToForm }: AuditResultsProps
 
         <button
           onClick={handleExportCSV}
-          className="inline-flex items-center gap-2 bg-[#18181b]/60 border border-zinc-800 hover:border-zinc-700/80 text-zinc-300 hover:text-white px-4.5 py-2.5 rounded-xl text-xs font-bold transition-all duration-300 shadow-md cursor-pointer hover:-translate-y-0.5"
+          className="inline-flex items-center gap-2 bg-[#18181b]/60 border border-zinc-800 hover:border-zinc-700/80 text-zinc-300 hover:text-white px-4.5 py-2.5 rounded-xl text-xs font-bold transition-all duration-300 shadow-md cursor-pointer hover:-translate-y-0.5 glass-button-glow"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
