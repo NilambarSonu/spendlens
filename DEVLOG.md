@@ -38,12 +38,14 @@ This log records the daily progression of the SpendLens internship project, cove
 ---
 
 ## Day 4: Backend Schema & REST Integrations (May 24, 2026)
-- **Goal**: Build Supabase DB tables and hook up backend transaction API endpoints.
+- **Goal**: Build Supabase DB tables, hook up backend transaction API endpoints, and establish honeypot security boundaries.
 - **Achievements**:
   - Created the PostgreSQL migrations schemas for Supabase, complete with indexes for fast URL lookups (`public_token`) and lead analytics.
   - Coded `app/api/audit/route.ts` with honeypot security safeguards and custom in-memory IP rate-limiters.
   - Coded `app/api/summary/route.ts` parsing raw calculations into Claude 3.5 Haiku prompts. Included robust default fallback engine.
   - Coded `app/api/lead/route.ts` enabling transaction mail transmissions through Resend.
+  - Configured CORS boundaries and validated security request headers for cross-origin compliance.
+- **Technical Insight**: Designed custom memory lease release routines in the IP rate-limiter to prevent heap exhaustion during large bulk-audit submission spikes.
 
 ---
 
