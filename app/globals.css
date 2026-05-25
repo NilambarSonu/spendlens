@@ -271,5 +271,13 @@ body {
   border-color: rgba(34, 211, 238, 0.7);
 }
 
+/* Custom focus glow utility for input state highlights */
+.focus-glow-primary:focus {
+  outline: none;
+  box-shadow: 0 0 15px rgba(217, 70, 239, 0.25);
+  border-color: rgba(217, 70, 239, 0.6);
+}
+
+
 
 
