@@ -9,7 +9,8 @@ Free web app that audits startup AI tool subscriptions and surfaces overspending
 
 - **Interactive Multi-Tool Audit Form**: Add/remove multiple tools, configure seat count, monthly spend, and plans.
 - **Deterministic Savings Audit Engine**: Programmatic analysis highlighting specific, actionable plan downgrades and tool switches.
-- **AI Summary Synthesis**: Live summarized breakdown generated directly by the **Google Gemini API (`gemini-2.5-flash`)**.
+- **Interactive Multi-Currency Selector**: Real-time localized pricing conversion across **USD ($), EUR (€), INR (₹), and GBP (£)** for all dashboard budget models, savings counters, and tool recommendation cards.
+- **AI Summary Synthesis**: Live summarized breakdown generated directly by the **Google Gemini API (`gemini-1.5-flash`)**.
 - **Custom Session Auth**: Secure authentication engine backed by PBKDF2 hashing, JWT token verification, and session state tracking on Neon DB.
 - **Lead Capture Mechanism**: Captures target business data (emails, company name, role) for high-savings users and schedules transactional emails.
 - **Luxury Preloader**: A gorgeous 3.8s visual scanner animation welcoming users with high-fidelity glow effects and real-time execution logs.
@@ -21,7 +22,7 @@ Free web app that audits startup AI tool subscriptions and surfaces overspending
 - **Styling**: Tailwind CSS + shadcn/ui components (Vanilla CSS theme palette configuration)
 - **Database**: Neon DB (PostgreSQL) — stored audits, users, and captured leads
 - **Email**: Resend — transactional email automation for captured leads
-- **AI Summary**: Google Gemini API (`gemini-2.5-flash` model via Google AI Studio)
+- **AI Summary**: Google Gemini API (`gemini-1.5-flash` model via Google AI Studio)
 - **Testing**: Vitest — comprehensive unit and integration testing suite
 - **CI**: GitHub Actions — automated test validation and typechecks
 

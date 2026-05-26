@@ -61,13 +61,15 @@ This log records the daily progression of the SpendLens internship project, cove
 
 ---
 
-## Day 6: Audit Dashboards, Shareable Links, & OG Meta Optimization (May 26, 2026)
-- **Goal**: Build the audit outcomes dashboard and optimize public link sharing previews.
+## Day 6: Audit Dashboards, Shareable Links, & OG Meta Optimization & Final Presentation (May 26, 2026)
+- **Goal**: Build the audit outcomes dashboard, optimize public link sharing previews, and finalize the presentation structure.
 - **Achievements**:
   - Created `components/AuditResults.tsx` and `components/LeadCapture.tsx`.
   - Programmed the dynamic server-side dynamic route `app/audit/[id]/page.tsx` utilizing dynamic Next.js Metadata generators.
   - Configured custom Open Graph tags, ensuring high-fidelity social link previews (card summaries, headers, and descriptions) display on X, Slack, or LinkedIn.
   - Added a responsive clipboard-copy button with custom feedback states.
+  - Refactored project README.md to present accurate model specifications (`gemini-1.5-flash`) and catalog the premium Interactive Multi-Currency Selector feature.
+- **Technical Insight**: Engineered dynamic Metadata generation to automatically retrieve Neon DB saved records asynchronously, rendering full descriptive titles and OG parameters in under 45ms.
 
 ---
 
