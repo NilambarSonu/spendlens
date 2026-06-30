@@ -64,20 +64,20 @@ export default function LeadCapture({
   if (success) {
     return (
       <GlassCard glowColor="emerald" className="text-center max-w-xl mx-auto font-sans">
-        <div className="w-12 h-12 bg-emerald-500/10 rounded-full flex items-center justify-center mx-auto mb-4 border border-emerald-500/20 animate-pulse-subtle">
+        <div className="w-12 h-12 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-4 border border-emerald-100 animate-pulse-subtle">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             strokeWidth={3}
             stroke="currentColor"
-            className="w-6 h-6 text-emerald-400"
+            className="w-6 h-6 text-[#10b981]"
           >
             <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
           </svg>
         </div>
-        <h4 className="text-lg font-bold text-zinc-100 mb-2 font-sans">Audit Saved Successfully!</h4>
-        <p className="text-sm text-zinc-400 mb-0 font-sans leading-relaxed">
+        <h4 className="text-lg font-bold text-[#0d253d] mb-2 font-sans">Audit Saved Successfully!</h4>
+        <p className="text-sm text-[#273951] mb-0 font-sans leading-relaxed">
           Check your inbox. We have dispatched a summary of your results and your custom dashboard link.
         </p>
       </GlassCard>
@@ -85,19 +85,19 @@ export default function LeadCapture({
   }
 
   return (
-    <GlassCard glowColor="fuchsia" className="max-w-xl mx-auto font-sans">
-      <h3 className="text-lg font-bold text-zinc-200 mb-2 font-sans flex items-center gap-2">
+    <GlassCard glowColor="primary" className="max-w-xl mx-auto font-sans">
+      <h3 className="text-lg font-bold text-[#0d253d] mb-2 font-sans flex items-center gap-2">
         <span>📬</span> Save Your Custom Savings Report
       </h3>
-      <p className="text-sm text-zinc-500 mb-6 font-sans leading-relaxed">
-        Enter your details to save your <strong className="text-emerald-400">${totalMonthlySavings}/mo</strong> savings report, receive optimization notifications when tool list prices drop, and get this audit via email.
+      <p className="text-sm text-[#64748d] mb-6 font-sans leading-relaxed">
+        Enter your details to save your <strong className="text-[#10b981] font-tabular">${totalMonthlySavings}/mo</strong> savings report, receive optimization notifications when tool list prices drop, and get this audit via email.
       </p>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Email */}
         <div className="flex flex-col gap-1.5">
           <label htmlFor="lead-email" className="text-[10px] font-mono font-bold text-zinc-500 uppercase tracking-wider">
-            Email Address <span className="text-[#D946EF] font-sans">*</span>
+            Email Address <span className="text-[#533afd] font-sans">*</span>
           </label>
           <input
             id="lead-email"
@@ -106,7 +106,7 @@ export default function LeadCapture({
             placeholder="ceo@yourstartup.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-3.5 py-2.5 text-sm text-zinc-100 placeholder-zinc-700 focus:outline-none focus:ring-2 focus:ring-[#D946EF]/20 focus:border-[#D946EF] transition-all font-sans"
+            className="w-full bg-white border border-[#a8c3de] rounded-md px-3.5 py-2.5 text-sm text-[#0d253d] placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-[#533afd]/10 focus:border-[#533afd] transition-all font-sans shadow-sm"
           />
         </div>
 
@@ -123,7 +123,7 @@ export default function LeadCapture({
               placeholder="VibeCode Inc"
               value={companyName}
               onChange={(e) => setCompanyName(e.target.value)}
-              className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-3.5 py-2.5 text-sm text-zinc-100 placeholder-zinc-700 focus:outline-none focus:ring-2 focus:ring-[#D946EF]/20 focus:border-[#D946EF] transition-all font-sans"
+              className="w-full bg-white border border-[#a8c3de] rounded-md px-3.5 py-2.5 text-sm text-[#0d253d] placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-[#533afd]/10 focus:border-[#533afd] transition-all font-sans shadow-sm"
             />
           </div>
 
@@ -138,14 +138,14 @@ export default function LeadCapture({
               placeholder="Founder / CTO"
               value={role}
               onChange={(e) => setRole(e.target.value)}
-              className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-3.5 py-2.5 text-sm text-zinc-100 placeholder-zinc-700 focus:outline-none focus:ring-2 focus:ring-[#D946EF]/20 focus:border-[#D946EF] transition-all font-sans"
+              className="w-full bg-white border border-[#a8c3de] rounded-md px-3.5 py-2.5 text-sm text-[#0d253d] placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-[#533afd]/10 focus:border-[#533afd] transition-all font-sans shadow-sm"
             />
           </div>
         </div>
 
         {/* Error message */}
         {error && (
-          <p className="text-xs font-semibold text-red-400 bg-red-950/30 border border-red-900/50 rounded-lg p-3 animate-pulse-subtle">
+          <p className="text-xs font-semibold text-red-600 bg-red-50 border border-red-200 rounded-md p-3">
             ⚠️ {error}
           </p>
         )}
@@ -154,7 +154,7 @@ export default function LeadCapture({
         <button
           type="submit"
           disabled={isLoading}
-          className={`w-full flex items-center justify-center bg-gradient-to-r from-[#D946EF] to-[#A21CAF] hover:from-[#C026D3] hover:to-[#8B1D9F] text-white font-bold py-3 px-6 rounded-full shadow-[0_0_20px_rgba(217,70,239,0.2)] hover:shadow-[0_0_35px_rgba(217,70,239,0.35)] cursor-pointer transition-all duration-300 text-sm hover:-translate-y-0.5 focus:outline-none ${
+          className={`w-full flex items-center justify-center bg-[#533afd] hover:bg-[#4434d4] active:bg-[#2e2b8c] text-white font-semibold py-3 px-6 rounded-full shadow-sm hover:shadow-md cursor-pointer transition-all duration-150 text-sm hover:-translate-y-0.5 focus:outline-none ${
             isLoading ? 'opacity-70 cursor-not-allowed' : ''
           }`}
         >
@@ -187,4 +187,3 @@ export default function LeadCapture({
     </GlassCard>
   );
 }
-

@@ -96,29 +96,29 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md transition-opacity duration-300">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0d253d]/50 backdrop-blur-sm transition-opacity duration-300">
       <div className="w-full max-w-xl relative animate-fade-in-up">
         {/* Background glow behind modal */}
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-accent/20 to-primary/10 rounded-3xl blur-2xl -z-10" />
+        <div className="absolute inset-0 bg-[#533afd]/5 rounded-3xl blur-2xl -z-10" />
 
-        <div className="bg-[#121214] border border-zinc-800/80 rounded-3xl p-6 md:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+        <div className="bg-white border border-[#e3e8ee] rounded-2xl p-6 md:p-8 shadow-[rgba(0,55,112,0.08)_0_20px_50px,rgba(0,55,112,0.04)_0_2px_10px]">
           {/* Header */}
           <div className="flex justify-between items-center mb-6">
-            <h3 className="text-xl md:text-2xl font-black text-white tracking-tight">
+            <h3 className="text-xl md:text-2xl font-semibold text-[#0d253d] tracking-tight">
               {mode === 'login' && 'Welcome Back'}
-              {mode === 'register' && 'Create Your Neon Account'}
+              {mode === 'register' && 'Create Your SpendLens Account'}
               {mode === 'history' && 'Your Audit History'}
             </h3>
             <button 
               onClick={onClose}
-              className="w-8 h-8 rounded-full bg-zinc-800/60 border border-zinc-700/60 flex items-center justify-center text-zinc-400 hover:text-white hover:bg-zinc-700/80 transition-all duration-200 cursor-pointer"
+              className="w-8 h-8 rounded-full bg-[#f6f9fc] border border-[#e3e8ee] flex items-center justify-center text-zinc-500 hover:text-[#0d253d] hover:bg-[#e3e8ee] transition-all duration-200 cursor-pointer"
             >
               ✕
             </button>
           </div>
 
           {error && (
-            <div className="mb-4 p-3 rounded-lg bg-danger/10 border border-danger/20 text-danger text-xs font-semibold">
+            <div className="mb-4 p-3 rounded-lg bg-red-50 border border-red-200 text-red-600 text-xs font-semibold">
               {error}
             </div>
           )}
@@ -126,25 +126,25 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
           {mode !== 'history' ? (
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-xs font-bold text-zinc-400 uppercase tracking-wider mb-1.5">Email Address</label>
+                <label className="block text-[11px] font-semibold text-zinc-500 uppercase tracking-wider mb-1.5">Email Address</label>
                 <input 
                   type="email"
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full bg-zinc-900/50 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-primary/60 transition-all"
+                  className="w-full bg-white border border-[#a8c3de] rounded-md px-4 py-2.5 text-sm text-[#0d253d] placeholder-zinc-400 focus:outline-none focus:border-[#533afd] focus:ring-2 focus:ring-[#533afd]/10 transition-all font-sans"
                   placeholder="name@company.com"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-zinc-400 uppercase tracking-wider mb-1.5">Password</label>
+                <label className="block text-[11px] font-semibold text-zinc-500 uppercase tracking-wider mb-1.5">Password</label>
                 <input 
                   type="password"
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full bg-zinc-900/50 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-primary/60 transition-all"
+                  className="w-full bg-white border border-[#a8c3de] rounded-md px-4 py-2.5 text-sm text-[#0d253d] placeholder-zinc-400 focus:outline-none focus:border-[#533afd] focus:ring-2 focus:ring-[#533afd]/10 transition-all font-sans"
                   placeholder="Min 6 characters"
                 />
               </div>
@@ -152,22 +152,22 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
               {mode === 'register' && (
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-bold text-zinc-400 uppercase tracking-wider mb-1.5">Company</label>
+                    <label className="block text-[11px] font-semibold text-zinc-500 uppercase tracking-wider mb-1.5">Company</label>
                     <input 
                       type="text"
                       value={companyName}
                       onChange={(e) => setCompanyName(e.target.value)}
-                      className="w-full bg-zinc-900/50 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-primary/60 transition-all"
+                      className="w-full bg-white border border-[#a8c3de] rounded-md px-4 py-2.5 text-sm text-[#0d253d] placeholder-zinc-400 focus:outline-none focus:border-[#533afd] focus:ring-2 focus:ring-[#533afd]/10 transition-all font-sans"
                       placeholder="Acme Inc."
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-zinc-400 uppercase tracking-wider mb-1.5">Your Role</label>
+                    <label className="block text-[11px] font-semibold text-zinc-500 uppercase tracking-wider mb-1.5">Your Role</label>
                     <input 
                       type="text"
                       value={role}
                       onChange={(e) => setRole(e.target.value)}
-                      className="w-full bg-zinc-900/50 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-primary/60 transition-all"
+                      className="w-full bg-white border border-[#a8c3de] rounded-md px-4 py-2.5 text-sm text-[#0d253d] placeholder-zinc-400 focus:outline-none focus:border-[#533afd] focus:ring-2 focus:ring-[#533afd]/10 transition-all font-sans"
                       placeholder="CTO / Founder"
                     />
                   </div>
@@ -177,7 +177,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full bg-primary hover:bg-primary-hover text-white font-extrabold rounded-xl py-3 text-sm transition-all duration-300 shadow-[0_4px_15px_rgba(219,70,239,0.3)] disabled:opacity-50 cursor-pointer"
+                className="w-full bg-[#533afd] hover:bg-[#4434d4] active:bg-[#2e2b8c] text-white font-semibold rounded-full py-3 text-sm transition-all duration-150 disabled:opacity-50 cursor-pointer shadow-sm"
               >
                 {isLoading ? 'Processing...' : mode === 'login' ? 'Sign In' : 'Sign Up'}
               </button>
@@ -186,7 +186,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
                 <button
                   type="button"
                   onClick={() => setMode(mode === 'login' ? 'register' : 'login')}
-                  className="text-xs text-zinc-400 hover:text-white transition-colors underline"
+                  className="text-xs text-zinc-500 hover:text-[#533afd] transition-colors underline"
                 >
                   {mode === 'login' ? "Don't have an account? Sign Up" : 'Already have an account? Sign In'}
                 </button>
@@ -194,20 +194,20 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
             </form>
           ) : (
             <div className="space-y-4">
-              <div className="flex items-center justify-between pb-3 border-b border-zinc-800">
-                <span className="text-xs text-zinc-400 font-bold">Past Scans</span>
+              <div className="flex items-center justify-between pb-3 border-b border-[#e3e8ee]">
+                <span className="text-xs text-[#273951] font-bold">Past Scans</span>
                 <button 
                   onClick={fetchMyAudits}
-                  className="text-xs text-primary hover:underline font-bold"
+                  className="text-xs text-[#533afd] hover:underline font-bold"
                 >
                   Refresh
                 </button>
               </div>
 
               {isLoading ? (
-                <div className="py-8 text-center text-sm text-zinc-500">Loading your history...</div>
+                <div className="py-8 text-center text-sm text-zinc-400">Loading your history...</div>
               ) : myAudits.length === 0 ? (
-                <div className="py-8 text-center text-sm text-zinc-500">
+                <div className="py-8 text-center text-sm text-zinc-400">
                   No past audits found. Complete an audit to save it to your profile!
                 </div>
               ) : (
@@ -216,21 +216,21 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
                     <a
                       key={audit.id}
                       href={`/audit/${audit.publicToken}`}
-                      className="block p-3.5 bg-zinc-900/40 border border-zinc-800 hover:border-zinc-700 rounded-xl transition-all hover:bg-zinc-850/60"
+                      className="block p-3.5 bg-[#f6f9fc] border border-[#e3e8ee] hover:border-[#a8c3de] rounded-lg transition-all hover:bg-[#e8ebfd]/40"
                     >
                       <div className="flex justify-between items-start mb-1">
-                        <span className="text-xs font-bold text-white uppercase tracking-tight">
+                        <span className="text-xs font-bold text-[#0d253d] uppercase tracking-tight">
                           {audit.primaryUseCase} Stack ({audit.teamSize} seats)
                         </span>
-                        <span className="text-[10px] text-zinc-500 font-medium">
+                        <span className="text-[10px] text-zinc-400 font-medium font-mono">
                           {new Date(audit.createdAt).toLocaleDateString()}
                         </span>
                       </div>
                       <div className="flex gap-4 text-xs font-semibold">
-                        <span className="text-zinc-400">
-                          Spend: <strong className="text-white">${audit.totalMonthlySpend}/mo</strong>
+                        <span className="text-zinc-500">
+                          Spend: <strong className="text-[#0d253d]">${audit.totalMonthlySpend}/mo</strong>
                         </span>
-                        <span className="text-emerald-400">
+                        <span className="text-[#10b981]">
                           Savings: <strong>${audit.totalMonthlySavings}/mo</strong>
                         </span>
                       </div>
@@ -243,7 +243,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
                 <button
                   type="button"
                   onClick={() => setMode('login')}
-                  className="text-xs text-zinc-400 hover:text-white transition-colors underline"
+                  className="text-xs text-zinc-500 hover:text-[#533afd] transition-colors underline"
                 >
                   Log into another account
                 </button>

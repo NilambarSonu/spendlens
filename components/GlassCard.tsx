@@ -5,14 +5,14 @@ import React, { useRef, useState } from 'react';
 interface GlassCardProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   className?: string;
-  glowColor?: 'fuchsia' | 'cyan' | 'emerald' | 'amber';
+  glowColor?: 'fuchsia' | 'cyan' | 'emerald' | 'amber' | 'primary' | 'subdued';
   enableTilt?: boolean;
 }
 
 export default function GlassCard({
   children,
   className = '',
-  glowColor = 'fuchsia',
+  glowColor = 'primary',
   enableTilt = true,
   ...props
 }: GlassCardProps) {
@@ -33,12 +33,12 @@ export default function GlassCard({
     if (enableTilt) {
       const xc = rect.width / 2;
       const yc = rect.height / 2;
-      // Max tilt angle in degrees
-      const maxTilt = 4;
+      // Max tilt angle in degrees (very subtle for Stripe styling)
+      const maxTilt = 2;
       const angleX = ((yc - y) / yc) * maxTilt; 
       const angleY = ((x - xc) / xc) * maxTilt;
 
-      card.style.transform = `perspective(1000px) rotateX(${angleX.toFixed(2)}deg) rotateY(${angleY.toFixed(2)}deg) translateY(-4px)`;
+      card.style.transform = `perspective(1000px) rotateX(${angleX.toFixed(2)}deg) rotateY(${angleY.toFixed(2)}deg) translateY(-2px)`;
     }
   };
 
@@ -53,19 +53,14 @@ export default function GlassCard({
     }
   };
 
-  // Map glowColor to tailwind radial colors
+  // Map glowColor to soft Stripe colors (subtle lights)
   const glowStyles = {
-    fuchsia: 'rgba(217, 70, 239, 0.15)',
-    cyan: 'rgba(34, 211, 238, 0.15)',
-    emerald: 'rgba(34, 197, 94, 0.15)',
-    amber: 'rgba(245, 158, 11, 0.15)',
-  };
-
-  const borderGlowColors = {
-    fuchsia: 'hover:border-[#D946EF]/40',
-    cyan: 'hover:border-[#22D3EE]/40',
-    emerald: 'hover:border-[#22C55E]/40',
-    amber: 'hover:border-[#F59E0B]/40',
+    fuchsia: 'rgba(83, 58, 253, 0.04)',
+    cyan: 'rgba(83, 58, 253, 0.04)',
+    emerald: 'rgba(16, 185, 129, 0.04)',
+    amber: 'rgba(245, 158, 11, 0.04)',
+    primary: 'rgba(83, 58, 253, 0.04)',
+    subdued: 'rgba(83, 58, 253, 0.02)',
   };
 
   return (
@@ -74,9 +69,7 @@ export default function GlassCard({
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className={`relative overflow-hidden bg-[#121214]/80 backdrop-blur-xl border border-zinc-800/80 rounded-3xl p-6 shadow-xl transition-all duration-300 ${borderGlowColors[glowColor]} ${
-        isHovered ? 'shadow-[0_20px_40px_rgba(0,0,0,0.4)]' : ''
-      } ${className}`}
+      className={`relative overflow-hidden bg-white border border-[#e3e8ee] rounded-2xl p-6 shadow-[rgba(0,55,112,0.08)_0_1px_3px] hover:border-[#a8c3de] hover:shadow-[rgba(0,55,112,0.08)_0_8px_24px,rgba(0,55,112,0.04)_0_2px_6px] transition-all duration-300 ${className}`}
       style={{
         transformStyle: 'preserve-3d',
         transition: 'transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.3s ease, box-shadow 0.3s ease',
@@ -84,17 +77,17 @@ export default function GlassCard({
       }}
       {...props}
     >
-      {/* 3D Holographic Glow Spot */}
+      {/* Subtle Indigo Glow Spot */}
       <div
-        className="absolute pointer-events-none transition-opacity duration-500 rounded-full"
+        className="pointer-events-none absolute transition-opacity duration-500 rounded-full"
         style={{
           width: '260px',
           height: '260px',
-          background: `radial-gradient(circle, ${glowStyles[glowColor]} 0%, transparent 70%)`,
+          background: `radial-gradient(circle, ${glowStyles[glowColor] || glowStyles.primary} 0%, transparent 70%)`,
           left: `${coords.x - 130}px`,
           top: `${coords.y - 130}px`,
           opacity: isHovered ? 1 : 0,
-          mixBlendMode: 'screen',
+          mixBlendMode: 'multiply',
         }}
       />
       

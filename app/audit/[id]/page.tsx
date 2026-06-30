@@ -96,16 +96,16 @@ export default async function AuditPage({ params }: AuditPageProps) {
 
   if (!audit) {
     return (
-      <div className="min-h-screen bg-[#09090b] flex flex-col items-center justify-center p-6 text-center font-sans text-zinc-100">
-        <div className="max-w-md bg-[#121214] p-8 rounded-[28px] border border-zinc-800/80 shadow-2xl">
-          <div className="w-16 h-16 bg-red-500/10 border border-red-500/35 rounded-full flex items-center justify-center mx-auto mb-6 shadow-[0_0_15px_rgba(239,68,68,0.2)]">
+      <div className="min-h-screen bg-[#f6f9fc] flex flex-col items-center justify-center p-6 text-center font-sans text-[#0d253d]">
+        <div className="max-w-md bg-white p-8 rounded-xl border border-[#e3e8ee] shadow-[rgba(0,55,112,0.08)_0_8px_24px,rgba(0,55,112,0.04)_0_2px_10px]">
+          <div className="w-16 h-16 bg-red-50 border border-red-200 rounded-full flex items-center justify-center mx-auto mb-6">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth={2.5}
               stroke="currentColor"
-              className="w-8 h-8 text-red-400"
+              className="w-8 h-8 text-red-500"
             >
               <path
                 strokeLinecap="round"
@@ -114,13 +114,13 @@ export default async function AuditPage({ params }: AuditPageProps) {
               />
             </svg>
           </div>
-          <h1 className="text-2xl font-black text-white mb-3">Audit Report Not Found</h1>
-          <p className="text-zinc-400 text-sm mb-6 leading-relaxed">
+          <h1 className="text-2xl font-semibold text-[#0d253d] mb-3">Audit Report Not Found</h1>
+          <p className="text-zinc-500 text-sm mb-6 leading-relaxed">
             The share link you followed is invalid, or the audit record has expired. Run a new audit to get your custom savings report.
           </p>
           <Link
             href="/"
-            className="inline-block bg-purple-600 hover:bg-purple-500 text-white font-bold py-3.5 px-7 rounded-full shadow-lg transition-all duration-300 text-sm"
+            className="button-primary-pill text-sm shadow-sm"
           >
             Start Free Audit
           </Link>
@@ -161,22 +161,22 @@ export default async function AuditPage({ params }: AuditPageProps) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#09090b] via-[#121214] to-[#09090b] flex flex-col font-sans text-zinc-100 selection:bg-purple-500/30 selection:text-white">
+    <div className="min-h-screen bg-[#f6f9fc] flex flex-col font-sans text-[#0d253d] selection:bg-[#533afd]/20 selection:text-[#0d253d]">
       {/* Header */}
-      <header className="bg-[#09090b]/85 backdrop-blur-lg border-b border-zinc-800/60 py-4 px-6 md:px-12 sticky top-0 z-50">
+      <header className="bg-white/80 py-5 px-6 md:px-12 sticky top-0 z-50 backdrop-blur-md border-b border-[#e3e8ee]">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-purple-500/10 border border-purple-500/35 rounded-xl flex items-center justify-center shadow-[0_0_15px_rgba(168,85,247,0.2)]">
-              <span className="text-purple-400 text-xl font-black tracking-tighter">S</span>
+            <div className="w-9 h-9 bg-[#533afd] rounded-lg flex items-center justify-center shadow-md">
+              <span className="text-white text-xl font-bold tracking-tighter select-none font-display">S</span>
             </div>
             <div>
-              <span className="font-extrabold text-white text-lg tracking-tight">SpendLens</span>
-              <span className="text-[10px] text-zinc-500 font-bold block leading-none tracking-wider font-mono">BY CREDEX</span>
+              <span className="font-bold text-[#0d253d] text-lg tracking-tight font-display">SpendLens</span>
+              <span className="text-[9px] text-[#64748d] font-bold block leading-none tracking-wider font-mono">BY CREDEX</span>
             </div>
           </Link>
           <Link
             href="/"
-            className="text-xs md:text-sm font-bold text-cyan-400 hover:text-white bg-cyan-500/10 border border-cyan-500/30 rounded-full px-5 py-2.5 hover:bg-cyan-500/20 hover:border-cyan-500/50 transition-all duration-300 shadow-[0_0_15px_rgba(34,211,238,0.1)]"
+            className="button-primary-pill text-xs md:text-sm shadow-sm"
           >
             📊 Run Your Own Free Audit
           </Link>
@@ -185,27 +185,27 @@ export default async function AuditPage({ params }: AuditPageProps) {
 
       {/* Main Content */}
       <main className="flex-1 w-full max-w-4xl mx-auto px-4 sm:px-6 py-12 md:py-20">
-        <div className="mb-8 bg-zinc-900/40 border border-zinc-800/60 p-4 rounded-2xl text-center text-xs text-zinc-400 font-bold tracking-wider font-mono uppercase shadow-sm">
+        <div className="mb-8 bg-[#f5e9d4] border border-[#e3e8ee] p-4 rounded-xl text-center text-xs text-[#0d253d] font-semibold tracking-wider font-sans uppercase shadow-sm">
           👀 You are viewing a shared AI spend audit report
         </div>
         <AuditResults result={mappedResult} />
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-zinc-800/60 bg-[#09090b] py-12 px-6 text-center text-xs text-zinc-500">
+      <footer className="border-t border-[#e3e8ee] bg-[#ffffff] py-16 px-6 text-center text-xs text-[#64748d]">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
           <p>© 2026 SpendLens by Credex. Built with precision for startup efficiency.</p>
           <div className="flex gap-5 font-medium">
-            <a href="https://credex.rocks" className="hover:text-purple-400 transition-colors duration-200">
+            <a href="https://credex.rocks" className="hover:text-[#533afd] transition-colors duration-200">
               Credex Homepage
             </a>
-            <span className="text-zinc-700">|</span>
-            <a href="https://cursor.sh" className="hover:text-purple-400 transition-colors duration-200">
+            <span className="text-[#e3e8ee]">|</span>
+            <a href="https://cursor.sh" className="hover:text-[#533afd] transition-colors duration-200">
               Cursor
             </a>
-            <span className="text-zinc-700">|</span>
-            <a href="https://ai.google.dev" className="hover:text-purple-400 transition-colors duration-200">
-              Google Gemini
+            <span className="text-[#e3e8ee]">|</span>
+            <a href="https://claude.ai" className="hover:text-[#533afd] transition-colors duration-200">
+              Anthropic Claude
             </a>
           </div>
         </div>

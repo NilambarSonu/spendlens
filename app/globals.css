@@ -1,45 +1,53 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Nunito:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
 
 @import "tailwindcss";
 
-@font-face {
-  font-family: 'SacrificeDemo';
-  src: url('/fonts/SacrificeDemo-8Ox1B.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-.font-tagline {
-  font-family: 'SacrificeDemo', sans-serif;
-}
-
 @theme {
-  --color-primary: #D946EF;    /* Fuchsia */
-  --color-accent: #22D3EE;     /* Cyan */
-  --color-tertiary: #FACC15;   /* Yellow */
-  --color-danger: #EF4444;     /* Red */
-  --color-warning: #F59E0B;    /* Amber */
-  --color-success: #22C55E;    /* Emerald */
-  --color-background-app: #09090b;
-  --color-card-app: #121214;
+  --color-primary: #533afd;             /* Indigo - brand signature CTA */
+  --color-primary-deep: #4434d4;        /* Indigo Deep - press state */
+  --color-primary-press: #2e2b8c;       /* Indigo Press */
+  --color-primary-soft: #665efd;        /* Indigo Soft - UI accents */
+  --color-primary-bg-subdued: #e8ebfd;  /* Indigo Subdued - tags */
   
-  --font-sans: var(--font-nunito), system-ui, -apple-system, sans-serif;
-  --font-display: var(--font-poppins), sans-serif;
+  --color-brand-dark-900: #0d253d;      /* Deep Navy - dashboard chrome */
+  --color-ruby: #ea2261;
+  --color-magenta: #f96bee;
+  --color-lemon: #9b6829;
+  
+  --color-canvas: #ffffff;              /* Canvas - default page bg */
+  --color-canvas-soft: #f6f9fc;         /* Canvas Soft - off-white */
+  --color-canvas-cream: #f5e9d4;        /* Canvas Cream - warm interlude */
+  --color-hairline: #e3e8ee;            /* Hairline border */
+  --color-hairline-input: #a8c3de;      /* Hairline input border */
+  --color-ink: #0d253d;                 /* Ink - body text */
+  --color-ink-secondary: #273951;       /* Ink Secondary */
+  --color-ink-mute: #64748d;            /* Ink Mute */
+  --color-ink-mute-2: #61718a;          /* Ink Mute 2 */
+  --color-on-primary: #ffffff;          /* Text on Indigo / Dark surfaces */
+  
+  --color-tertiary: #facc15;
+  --color-danger: #ef4444;
+  --color-warning: #f59e0b;
+  --color-success: #10b981;             /* Clean emerald */
+  --color-background-app: #ffffff;
+  --color-card-app: #f6f9fc;
+  
+  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+  --font-display: var(--font-inter), sans-serif;
   --font-mono: var(--font-space-mono), monospace;
 }
 
 :root {
-  --font-poppins: 'Poppins', sans-serif;
-  --font-nunito: 'Nunito', sans-serif;
+  --font-inter: 'Inter', sans-serif;
   --font-space-mono: 'Space Mono', monospace;
-  --background: #09090b;
-  --foreground: #f4f4f5;
-  --primary: 217 70 239; /* D946EF */
-  --secondary: 34 211 238; /* 22D3EE */
-  --accent: 34 211 238;
-  --card: 18 18 20;
-  --border: 39 39 42;
+  
+  --background: #ffffff;
+  --foreground: #0d253d;
+  --primary: 83 58 253;                 /* #533afd */
+  --secondary: 102 94 253;              /* #665efd */
+  --accent: 83 58 253;
+  --card: 255 255 255;
+  --border: 227 232 238;                /* #e3e8ee */
 }
 
 body {
@@ -47,42 +55,205 @@ body {
   color: var(--foreground);
   min-height: 100vh;
   overflow-x: hidden;
-  font-family: var(--font-nunito), sans-serif;
-  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  font-family: var(--font-inter), sans-serif;
+  font-feature-settings: "ss01" on;     /* Enable stylistic set ss01 globally */
+  -webkit-font-smoothing: antialiased;
 }
 
-/* ShopVibe Glassmorphism custom styling utilities */
+/* Tabular figures for money */
+.font-tabular {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" on;
+}
+
+/* Typography styles based on Stripe's Sohne scale using Inter */
+.display-xxl {
+  font-size: 56px;
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -1.4px;
+}
+.display-xl {
+  font-size: 48px;
+  font-weight: 300;
+  line-height: 1.15;
+  letter-spacing: -0.96px;
+}
+.display-lg {
+  font-size: 32px;
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.64px;
+}
+.display-md {
+  font-size: 26px;
+  font-weight: 300;
+  line-height: 1.12;
+  letter-spacing: -0.26px;
+}
+.heading-lg {
+  font-size: 22px;
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.22px;
+}
+.heading-md {
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 1.4;
+  letter-spacing: -0.2px;
+}
+.heading-sm {
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1.4;
+  letter-spacing: 0;
+}
+.body-lg {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.4;
+  letter-spacing: 0;
+}
+.body-md {
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.4;
+  letter-spacing: 0;
+}
+.body-tabular {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.4;
+  letter-spacing: -0.42px;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" on;
+}
+.button-md {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.0;
+  letter-spacing: 0;
+}
+.button-sm {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.0;
+  letter-spacing: 0;
+}
+.caption {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: -0.39px;
+}
+.micro {
+  font-size: 11px;
+  font-weight: 300;
+  line-height: 1.4;
+  letter-spacing: 0;
+}
+.micro-cap {
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: 0.1px;
+  text-transform: uppercase;
+}
+
+/* Stripe Design Tokens & Utilities */
+.button-primary-pill {
+  background-color: #533afd;
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 15px;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+}
+.button-primary-pill:hover {
+  background-color: #4434d4;
+  transform: translateY(-1px);
+}
+.button-primary-pill:active {
+  background-color: #2e2b8c;
+  transform: translateY(0);
+}
+
+.button-secondary-pill {
+  background-color: #ffffff;
+  color: #533afd;
+  font-weight: 500;
+  font-size: 15px;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  border: 1.5px solid #533afd;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.button-secondary-pill:hover {
+  background-color: #f6f9fc;
+  border-color: #4434d4;
+  color: #4434d4;
+  transform: translateY(-1px);
+}
+
+.button-on-dark-pill {
+  background-color: #0d253d;
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 15px;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+}
+.button-on-dark-pill:hover {
+  background-color: #1c1e54;
+  transform: translateY(-1px);
+}
+
+/* Faux glass classes mapped to Stripe Card specs for backwards compatibility */
 .glass-panel {
-  background: rgba(18, 18, 20, 0.7);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background-color: #ffffff;
+  border: 1px solid #e3e8ee;
+  box-shadow: rgba(0, 55, 112, 0.08) 0 8px 24px, rgba(0, 55, 112, 0.04) 0 2px 6px;
 }
 
 .glass-card {
-  background: rgba(18, 18, 20, 0.75);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(63, 63, 70, 0.4);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  border: 1px solid #e3e8ee;
+  box-shadow: rgba(0, 55, 112, 0.08) 0 1px 3px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .glass-card:hover {
-  border-color: rgba(217, 70, 239, 0.5); /* Fuchsia tint */
-  box-shadow: 0 14px 32px rgba(217, 70, 239, 0.12), 0 6px 12px rgba(0, 0, 0, 0.1);
+  border-color: #a8c3de;
+  box-shadow: rgba(0, 55, 112, 0.08) 0 8px 24px, rgba(0, 55, 112, 0.04) 0 2px 6px;
   transform: translateY(-3px);
 }
 
-/* Custom premium transitions and keyframes */
+/* Animations adapted for Stripe style */
 @keyframes pulse-subtle {
   0%, 100% {
     opacity: 1;
     transform: scale(1);
   }
   50% {
-    opacity: .95;
-    transform: scale(1.01);
+    opacity: .98;
+    transform: scale(1.005);
   }
 }
 
@@ -90,13 +261,13 @@ body {
   animation: pulse-subtle 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
-/* Custom glow element styling */
+/* Subdued blue glow elements styling */
 .neon-glow-primary {
-  box-shadow: 0 0 50px rgba(217, 70, 239, 0.15);
+  box-shadow: 0 0 50px rgba(83, 58, 253, 0.08);
 }
 
 .neon-glow-accent {
-  box-shadow: 0 0 50px rgba(34, 211, 238, 0.15);
+  box-shadow: 0 0 50px rgba(102, 94, 253, 0.05);
 }
 
 /* Scrollbar styling */
@@ -106,17 +277,17 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #18181b;
+  background: #f6f9fc;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #3f3f46;
+  background: #e3e8ee;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #52525b;
+  background: #a8c3de;
 }
 
 /* Premium 3D perspective tilt effects */
@@ -127,9 +298,9 @@ body {
   will-change: transform;
 }
 .tilt-card:hover {
-  transform: rotateX(3deg) rotateY(3deg) translateY(-4px);
-  box-shadow: 0 20px 40px rgba(217, 70, 239, 0.12), 0 0 30px rgba(34, 211, 238, 0.08);
-  border-color: rgba(217, 70, 239, 0.5);
+  transform: rotateX(2deg) rotateY(2deg) translateY(-4px);
+  box-shadow: rgba(0, 55, 112, 0.08) 0 15px 35px, rgba(0, 55, 112, 0.04) 0 5px 15px;
+  border-color: rgba(83, 58, 253, 0.3);
 }
 
 .tilt-card-reverse {
@@ -139,17 +310,17 @@ body {
   will-change: transform;
 }
 .tilt-card-reverse:hover {
-  transform: rotateX(-3deg) rotateY(-3deg) translateY(-4px);
-  box-shadow: 0 20px 40px rgba(34, 211, 238, 0.12), 0 0 30px rgba(217, 70, 239, 0.08);
-  border-color: rgba(34, 211, 238, 0.5);
+  transform: rotateX(-2deg) rotateY(-2deg) translateY(-4px);
+  box-shadow: rgba(0, 55, 112, 0.08) 0 15px 35px, rgba(0, 55, 112, 0.04) 0 5px 15px;
+  border-color: rgba(83, 58, 253, 0.3);
 }
 
 /* Glow toggle styling */
 .toggle-glow {
-  box-shadow: 0 0 15px rgba(217, 70, 239, 0.4);
+  box-shadow: 0 0 12px rgba(83, 58, 253, 0.2);
 }
 
-/* Premium Preloader keyframes and classes */
+/* Preloader Animations */
 @keyframes slide-up {
   from {
     opacity: 0;
@@ -179,11 +350,11 @@ body {
 @keyframes float-particle {
   0%, 100% {
     transform: translateY(0px) scale(1);
-    opacity: 0.3;
+    opacity: 0.15;
   }
   50% {
     transform: translateY(-20px) scale(1.1);
-    opacity: 0.6;
+    opacity: 0.3;
   }
 }
 .animate-float-1 {
@@ -201,33 +372,22 @@ body {
   to { opacity: 0; pointer-events: none; }
 }
 .animate-fade-out {
-  animation: fade-out 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: fade-out 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Premium 3D Wobble & Glow Preloader Animations */
+/* Premium 3D Preloader Animations */
 @keyframes logo-3d-wobble {
   0% {
     transform: rotateX(0deg) rotateY(0deg) rotate(45deg) scale(1);
-    box-shadow: 0 0 35px rgba(217, 70, 239, 0.55), 0 0 15px rgba(34, 211, 238, 0.35);
-    filter: hue-rotate(0deg);
-  }
-  25% {
-    transform: rotateX(15deg) rotateY(-15deg) rotate(48deg) scale(1.06);
-    box-shadow: 0 0 55px rgba(217, 70, 239, 0.85), 0 0 30px rgba(34, 211, 238, 0.6);
+    box-shadow: 0 0 25px rgba(83, 58, 253, 0.3);
   }
   50% {
-    transform: rotateX(-12deg) rotateY(18deg) rotate(41deg) scale(0.96);
-    box-shadow: 0 0 35px rgba(34, 211, 238, 0.75), 0 0 15px rgba(217, 70, 239, 0.45);
-    filter: hue-rotate(180deg);
-  }
-  75% {
-    transform: rotateX(18deg) rotateY(12deg) rotate(47deg) scale(1.04);
-    box-shadow: 0 0 55px rgba(217, 70, 239, 0.85), 0 0 30px rgba(34, 211, 238, 0.6);
+    transform: rotateX(10deg) rotateY(-10deg) rotate(41deg) scale(1.03);
+    box-shadow: 0 0 35px rgba(83, 58, 253, 0.45);
   }
   100% {
     transform: rotateX(0deg) rotateY(0deg) rotate(45deg) scale(1);
-    box-shadow: 0 0 35px rgba(217, 70, 239, 0.55), 0 0 15px rgba(34, 211, 238, 0.35);
-    filter: hue-rotate(360deg);
+    box-shadow: 0 0 25px rgba(83, 58, 253, 0.3);
   }
 }
 .animate-logo-3d {
@@ -238,12 +398,12 @@ body {
 
 @keyframes text-heartbeat {
   0%, 100% {
-    transform: scale(1) translateZ(30px);
-    text-shadow: 0 0 15px rgba(255, 255, 255, 0.9), 0 0 30px rgba(217, 70, 239, 0.6);
+    transform: scale(1) translateZ(20px);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(83, 58, 253, 0.3);
   }
   50% {
-    transform: scale(1.18) translateZ(45px);
-    text-shadow: 0 0 25px rgba(255, 255, 255, 1), 0 0 45px rgba(34, 211, 238, 0.9);
+    transform: scale(1.1) translateZ(30px);
+    text-shadow: 0 0 15px rgba(255, 255, 255, 1), 0 0 30px rgba(83, 58, 253, 0.5);
   }
 }
 .animate-text-heartbeat {
@@ -262,22 +422,17 @@ body {
   animation: spin-counter-clockwise 6s linear infinite;
 }
 
-/* Glass Button neon breathing accent outline */
+/* Button & input states */
 .glass-button-glow {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .glass-button-glow:hover {
-  box-shadow: 0 0 20px rgba(34, 211, 238, 0.35), inset 0 0 10px rgba(34, 211, 238, 0.2);
-  border-color: rgba(34, 211, 238, 0.7);
+  box-shadow: 0 0 15px rgba(83, 58, 253, 0.15);
+  border-color: rgba(83, 58, 253, 0.4);
 }
 
-/* Custom focus glow utility for input state highlights */
 .focus-glow-primary:focus {
   outline: none;
-  box-shadow: 0 0 15px rgba(217, 70, 239, 0.25);
-  border-color: rgba(217, 70, 239, 0.6);
+  box-shadow: 0 0 0 2px rgba(83, 58, 253, 0.15);
+  border-color: rgba(83, 58, 253, 0.6);
 }
-
-
-
-

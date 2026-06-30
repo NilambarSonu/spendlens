@@ -106,10 +106,10 @@ export default function ToolRow({
   }));
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 items-end bg-[#18181b]/50 backdrop-blur-md p-5 rounded-2xl border border-zinc-800/70 shadow-md hover:border-zinc-700/60 hover:shadow-xl transition-all duration-300">
+    <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 items-end bg-white p-5 rounded-xl border border-[#e3e8ee] shadow-sm hover:border-[#a8c3de] hover:shadow-md transition-all duration-200">
       {/* Tool Selection */}
       <div className="sm:col-span-3 flex flex-col gap-1.5">
-        <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest font-mono">
+        <label className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider font-sans">
           AI Tool
         </label>
         <GlassSelect
@@ -123,7 +123,7 @@ export default function ToolRow({
 
       {/* Plan Selection */}
       <div className="sm:col-span-3 flex flex-col gap-1.5">
-        <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest font-mono">
+        <label className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider font-sans">
           Plan Level
         </label>
         <GlassSelect
@@ -137,7 +137,7 @@ export default function ToolRow({
 
       {/* Seats */}
       <div className="sm:col-span-2 flex flex-col gap-1.5">
-        <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest font-mono">
+        <label className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider font-sans">
           Seats / Licenses
         </label>
         <input
@@ -145,22 +145,22 @@ export default function ToolRow({
           min="1"
           value={entry.seats}
           onChange={handleSeatsChange}
-          className="w-full bg-[#1e1e24] border border-zinc-800 rounded-xl px-3 py-2.5 text-sm font-medium text-zinc-100 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-250"
+          className="w-full bg-white border border-[#a8c3de] rounded-md px-3 py-2 text-sm font-medium text-[#0d253d] focus:outline-none focus:ring-2 focus:ring-[#533afd]/10 focus:border-[#533afd] transition-all font-sans"
         />
       </div>
 
       {/* Monthly Spend */}
       <div className="sm:col-span-3 flex flex-col gap-1.5">
-        <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest font-mono flex justify-between">
+        <label className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider font-sans flex justify-between">
           <span>Monthly Spend</span>
           {currentToolDef && (
-            <span className="text-[9px] text-zinc-500 font-medium normal-case font-mono">
+            <span className="text-[9px] text-zinc-400 font-medium normal-case font-mono">
               List: ${currentToolDef.plans.find(p => p.id === entry.planId)?.pricePerSeat || 0}/seat
             </span>
           )}
         </label>
         <div className="relative">
-          <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-500 text-sm font-medium font-mono">
+          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 text-sm font-medium font-mono">
             $
           </span>
           <input
@@ -169,7 +169,7 @@ export default function ToolRow({
             step="0.01"
             value={entry.monthlySpend}
             onChange={handleSpendChange}
-            className="w-full bg-[#1e1e24] border border-zinc-800 rounded-xl pl-8 pr-3 py-2.5 text-sm font-medium text-zinc-100 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-250"
+            className="w-full bg-white border border-[#a8c3de] rounded-md pl-7 pr-3 py-2 text-sm font-medium text-[#0d253d] focus:outline-none focus:ring-2 focus:ring-[#533afd]/10 focus:border-[#533afd] transition-all font-sans"
           />
         </div>
       </div>
@@ -179,7 +179,7 @@ export default function ToolRow({
         <button
           type="button"
           onClick={() => onRemove(index)}
-          className="p-2.5 rounded-xl border border-zinc-800/80 hover:border-danger/30 text-zinc-500 hover:text-danger bg-[#1e1e24] hover:bg-danger/10 transition-all duration-300 focus:outline-none cursor-pointer"
+          className="p-2 rounded-md border border-[#e3e8ee] hover:border-red-200 text-zinc-400 hover:text-red-500 bg-white hover:bg-red-50 transition-all duration-200 focus:outline-none cursor-pointer"
           title="Remove tool"
         >
           <svg
@@ -188,7 +188,7 @@ export default function ToolRow({
             viewBox="0 0 24 24"
             strokeWidth={2}
             stroke="currentColor"
-            className="w-5 h-5"
+            className="w-4.5 h-4.5"
           >
             <path
               strokeLinecap="round"

@@ -123,13 +123,13 @@ export default function GlassSelect({
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between bg-zinc-950 border border-zinc-800 hover:border-zinc-700/80 rounded-xl px-3.5 py-3 text-sm font-semibold text-zinc-100 focus:outline-none focus:ring-2 focus:ring-[#D946EF]/20 focus:border-[#D946EF] transition-all duration-300 cursor-pointer text-left shadow-inner"
+        className="w-full flex items-center justify-between bg-white border border-[#a8c3de] hover:border-[#533afd] rounded-md px-3.5 py-2.5 text-sm font-medium text-[#0d253d] focus:outline-none focus:ring-2 focus:ring-[#533afd]/10 focus:border-[#533afd] transition-all duration-200 cursor-pointer text-left shadow-sm"
       >
         <div className="flex items-center gap-2.5 min-w-0">
           {selectedOption?.iconId && (
             <ToolIcon toolId={selectedOption.iconId} size={18} className="shrink-0" />
           )}
-          <span className="truncate font-sans font-medium">
+          <span className="truncate font-sans font-medium text-[#0d253d]">
             {selectedOption ? selectedOption.name : placeholder}
           </span>
         </div>
@@ -139,8 +139,8 @@ export default function GlassSelect({
           viewBox="0 0 24 24"
           strokeWidth={2.5}
           stroke="currentColor"
-          className={`w-4 h-4 text-zinc-500 transition-transform duration-300 shrink-0 ${
-            isOpen ? 'rotate-180 text-[#D946EF]' : ''
+          className={`w-4 h-4 text-zinc-400 transition-transform duration-300 shrink-0 ${
+            isOpen ? 'rotate-180 text-[#533afd]' : ''
           }`}
         >
           <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
@@ -149,16 +149,16 @@ export default function GlassSelect({
 
       {/* Dropdown Floating Panel */}
       {isOpen && (
-        <div className="absolute z-50 left-0 right-0 mt-2 bg-[#121214]/95 backdrop-blur-xl border border-zinc-800/90 rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.7),_0_0_1px_rgba(255,255,255,0.1)] overflow-hidden animate-in fade-in slide-in-from-top-3 duration-200">
+        <div className="absolute z-50 left-0 right-0 mt-1.5 bg-white border border-[#e3e8ee] rounded-md shadow-[rgba(0,55,112,0.08)_0_8px_24px,rgba(0,55,112,0.04)_0_2px_6px] overflow-hidden animate-in fade-in slide-in-from-top-3 duration-200">
           {/* Search bar inside Dropdown */}
-          <div className="p-2 border-b border-zinc-800/80 flex items-center gap-2 bg-[#16161a]/60">
+          <div className="p-2 border-b border-[#e3e8ee] flex items-center gap-2 bg-[#f6f9fc]">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth={2.5}
               stroke="currentColor"
-              className="w-4 h-4 text-zinc-500 shrink-0 ml-1.5"
+              className="w-4 h-4 text-zinc-400 shrink-0 ml-1.5"
             >
               <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
             </svg>
@@ -168,13 +168,13 @@ export default function GlassSelect({
               placeholder={searchPlaceholder}
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full bg-transparent border-0 outline-none text-xs text-zinc-100 placeholder-zinc-650 py-1 font-sans"
+              className="w-full bg-transparent border-0 outline-none text-xs text-[#0d253d] placeholder-zinc-400 py-1 font-sans"
             />
             {search && (
               <button
                 type="button"
                 onClick={() => setSearch('')}
-                className="p-1 hover:text-zinc-300 text-zinc-500 transition-colors cursor-pointer"
+                className="p-1 hover:text-[#0d253d] text-zinc-400 transition-colors cursor-pointer"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -193,7 +193,7 @@ export default function GlassSelect({
           {/* List Options */}
           <ul className="max-h-[220px] overflow-y-auto py-1 scrollbar-thin scrollbar-zinc">
             {filteredOptions.length === 0 ? (
-              <li className="px-4 py-3 text-xs text-zinc-500 text-center font-sans font-medium">
+              <li className="px-4 py-3 text-xs text-zinc-400 text-center font-sans font-medium">
                 No matching results found
               </li>
             ) : (
@@ -208,13 +208,13 @@ export default function GlassSelect({
                       disabled={option.disabled}
                       onClick={() => handleSelect(option)}
                       className={`w-full flex items-center justify-between px-3.5 py-2.5 text-xs text-left cursor-pointer transition-all duration-200 font-sans ${
-                        option.disabled ? 'opacity-40 cursor-not-allowed bg-zinc-950/20' : ''
+                        option.disabled ? 'opacity-40 cursor-not-allowed bg-[#f6f9fc]/50' : ''
                       } ${
                         isSelected
-                          ? 'bg-[#D946EF]/10 text-white font-bold'
+                          ? 'bg-[#e8ebfd] text-[#533afd] font-semibold'
                           : isActive
-                          ? 'bg-zinc-800/50 text-zinc-100'
-                          : 'hover:bg-zinc-800/30 text-zinc-300'
+                          ? 'bg-[#f6f9fc] text-[#0d253d]'
+                          : 'hover:bg-[#f6f9fc] text-[#273951]'
                       }`}
                     >
                       <div className="flex items-center gap-2.5 min-w-0">
@@ -225,7 +225,7 @@ export default function GlassSelect({
                       </div>
                       
                       {option.details && (
-                        <span className="text-[10px] text-zinc-500 truncate ml-2 font-mono shrink-0">
+                        <span className="text-[10px] text-zinc-400 truncate ml-2 font-mono shrink-0">
                           {option.details}
                         </span>
                       )}

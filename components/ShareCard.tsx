@@ -49,11 +49,11 @@ export default function ShareCard({ publicToken, totalMonthlySavings }: ShareCar
   };
 
   return (
-    <GlassCard glowColor="cyan" className="max-w-xl mx-auto text-center font-sans">
-      <h3 className="text-lg font-bold text-zinc-200 mb-2 font-sans flex items-center justify-center gap-2">
+    <GlassCard glowColor="primary" className="max-w-xl mx-auto text-center font-sans">
+      <h3 className="text-lg font-bold text-[#0d253d] mb-2 font-sans flex items-center justify-center gap-2">
         <span>📢</span> Share This Audit
       </h3>
-      <p className="text-sm text-zinc-500 mb-6 font-sans leading-relaxed">
+      <p className="text-sm text-[#64748d] mb-6 font-sans leading-relaxed">
         Share these findings with your team, founder, or co-founders to align on your AI budget strategy.
       </p>
 
@@ -61,10 +61,10 @@ export default function ShareCard({ publicToken, totalMonthlySavings }: ShareCar
         {/* Copy Link Button */}
         <button
           onClick={handleCopy}
-          className={`w-full sm:w-auto flex items-center justify-center gap-2 border font-bold py-3 px-6 rounded-full transition-all duration-300 text-sm cursor-pointer focus:outline-none hover:-translate-y-0.5 ${
+          className={`w-full sm:w-auto flex items-center justify-center gap-2 border font-semibold py-3 px-6 rounded-full transition-all duration-150 text-sm cursor-pointer focus:outline-none hover:-translate-y-0.5 ${
             copied
-              ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'
-              : 'bg-zinc-950 hover:bg-zinc-900 border border-zinc-800 hover:border-zinc-700 text-zinc-300'
+              ? 'bg-emerald-50 text-[#10b981] border-emerald-200 shadow-sm'
+              : 'bg-white hover:bg-[#f6f9fc] border border-[#a8c3de] text-[#273951]'
           }`}
         >
           {copied ? (
@@ -75,7 +75,7 @@ export default function ShareCard({ publicToken, totalMonthlySavings }: ShareCar
                 viewBox="0 0 24 24"
                 strokeWidth={2.5}
                 stroke="currentColor"
-                className="w-4 h-4 text-emerald-400"
+                className="w-4 h-4 text-[#10b981]"
               >
                 <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
               </svg>
@@ -89,7 +89,7 @@ export default function ShareCard({ publicToken, totalMonthlySavings }: ShareCar
                 viewBox="0 0 24 24"
                 strokeWidth={2}
                 stroke="currentColor"
-                className="w-4 h-4 text-zinc-500"
+                className="w-4 h-4 text-zinc-400"
               >
                 <path
                   strokeLinecap="round"
@@ -105,7 +105,7 @@ export default function ShareCard({ publicToken, totalMonthlySavings }: ShareCar
         {/* Dynamic Web Share */}
         <button
           onClick={handleShare}
-          className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#D946EF] hover:bg-[#C026D3] text-white font-bold py-3 px-6 rounded-full transition-all duration-300 text-sm cursor-pointer shadow-[0_0_15px_rgba(217,70,239,0.25)] hover:-translate-y-0.5 focus:outline-none border-none"
+          className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#533afd] hover:bg-[#4434d4] text-white font-semibold py-3 px-6 rounded-full transition-all duration-150 text-sm cursor-pointer shadow-sm hover:-translate-y-0.5 focus:outline-none border-none"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -133,7 +133,7 @@ export default function ShareCard({ publicToken, totalMonthlySavings }: ShareCar
           )}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#1DA1F2]/10 hover:bg-[#1DA1F2]/20 border border-[#1DA1F2]/20 text-[#1DA1F2] font-bold py-3 px-6 rounded-full transition-all duration-300 text-sm cursor-pointer focus:outline-none hover:-translate-y-0.5"
+          className="w-full sm:w-auto flex items-center justify-center gap-2 bg-white hover:bg-[#f6f9fc] border border-[#a8c3de] text-[#1DA1F2] font-semibold py-3 px-6 rounded-full transition-all duration-150 text-sm cursor-pointer focus:outline-none hover:-translate-y-0.5"
         >
           <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
             <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />

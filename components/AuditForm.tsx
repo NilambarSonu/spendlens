@@ -149,12 +149,12 @@ export default function AuditForm({ onSubmit, isLoading }: AuditFormProps) {
       {/* Grid Container for Team Info & Use Cases */}
       <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
         {/* Team Size */}
-        <GlassCard glowColor="fuchsia" className="md:col-span-4 flex flex-col gap-2.5">
+        <GlassCard glowColor="primary" className="md:col-span-4 flex flex-col gap-2.5">
           <div className="flex justify-between items-center">
-            <label htmlFor="team-size" className="text-sm font-semibold text-zinc-300 font-sans">
+            <label htmlFor="team-size" className="text-sm font-semibold text-[#0d253d] font-sans">
               👥 Team Size
             </label>
-            <div className="relative flex items-center bg-zinc-950 border border-zinc-800 rounded-lg px-2.5 py-1">
+            <div className="relative flex items-center bg-white border border-[#a8c3de] rounded-md px-2.5 py-1">
               <input
                 id="team-size"
                 type="number"
@@ -162,12 +162,12 @@ export default function AuditForm({ onSubmit, isLoading }: AuditFormProps) {
                 max="10000"
                 value={teamSize}
                 onChange={(e) => setTeamSize(Math.max(1, parseInt(e.target.value, 10) || 1))}
-                className="w-12 bg-transparent text-right text-xs font-bold text-[#D946EF] focus:outline-none font-mono"
+                className="w-12 bg-transparent text-right text-xs font-semibold text-[#533afd] focus:outline-none font-mono"
               />
-              <span className="text-[10px] text-zinc-500 font-semibold uppercase tracking-wider ml-1 font-mono">seats</span>
+              <span className="text-[10px] text-zinc-400 font-bold uppercase tracking-wider ml-1 font-mono">seats</span>
             </div>
           </div>
-          <p className="text-xs text-zinc-550 font-sans">
+          <p className="text-xs text-zinc-500 font-sans">
             Used to right-size licenses and enterprise plans.
           </p>
           
@@ -178,12 +178,12 @@ export default function AuditForm({ onSubmit, isLoading }: AuditFormProps) {
               max="150"
               value={teamSize > 150 ? 150 : teamSize}
               onChange={(e) => setTeamSize(parseInt(e.target.value, 10) || 1)}
-              className="w-full h-2 bg-zinc-900 rounded-lg appearance-none cursor-pointer accent-[#D946EF] focus:outline-none focus:ring-2 focus:ring-[#D946EF]/20"
+              className="w-full h-1.5 bg-[#e3e8ee] rounded-lg appearance-none cursor-pointer accent-[#533afd] focus:outline-none focus:ring-2 focus:ring-[#533afd]/10"
               style={{
-                background: `linear-gradient(to right, #D946EF 0%, #D946EF ${Math.min(100, (teamSize / 150) * 100)}%, #1e1e24 ${Math.min(100, (teamSize / 150) * 100)}%, #1e1e24 100%)`
+                background: `linear-gradient(to right, #533afd 0%, #533afd ${Math.min(100, (teamSize / 150) * 100)}%, #e3e8ee ${Math.min(100, (teamSize / 150) * 100)}%, #e3e8ee 100%)`
               }}
             />
-            <div className="flex justify-between text-[10px] font-mono text-zinc-500 font-bold px-0.5">
+            <div className="flex justify-between text-[10px] font-mono text-zinc-400 font-bold px-0.5">
               <span>1 seat</span>
               <span>75</span>
               <span>150+ seats</span>
@@ -192,11 +192,11 @@ export default function AuditForm({ onSubmit, isLoading }: AuditFormProps) {
         </GlassCard>
 
         {/* Primary Use Case */}
-        <GlassCard glowColor="cyan" className="md:col-span-8 flex flex-col gap-2.5">
-          <span className="text-sm font-semibold text-zinc-300 font-sans">
+        <GlassCard glowColor="subdued" className="md:col-span-8 flex flex-col gap-2.5">
+          <span className="text-sm font-semibold text-[#0d253d] font-sans">
             🎯 What is your team&apos;s primary AI use case?
           </span>
-          <p className="text-xs text-zinc-550 font-sans">
+          <p className="text-xs text-[#64748d] font-sans">
             Helps verify if tools match your actual workflow capability needs.
           </p>
           
@@ -212,14 +212,14 @@ export default function AuditForm({ onSubmit, isLoading }: AuditFormProps) {
                 key={uc.id}
                 type="button"
                 onClick={() => setPrimaryUseCase(uc.id as UseCase)}
-                className={`flex flex-col items-center justify-center p-3 rounded-xl border text-center transition-all duration-300 focus:outline-none cursor-pointer ${
+                className={`flex flex-col items-center justify-center p-3 rounded-xl border text-center transition-all duration-200 focus:outline-none cursor-pointer ${
                   primaryUseCase === uc.id
-                    ? 'border-[#D946EF] bg-[#D946EF]/10 text-white shadow-[0_0_15px_rgba(217,70,239,0.15)] ring-2 ring-[#D946EF]/20'
-                    : 'border-zinc-800 bg-zinc-900/30 text-zinc-400 hover:border-zinc-700 hover:bg-zinc-900/50'
+                    ? 'border-[#533afd] bg-[#e8ebfd] text-[#533afd] font-semibold shadow-sm ring-2 ring-[#533afd]/10'
+                    : 'border-[#e3e8ee] bg-[#f6f9fc] text-[#273951] hover:border-[#a8c3de] hover:bg-white'
                 }`}
               >
                 <span className="text-sm font-bold tracking-tight font-sans">{uc.label}</span>
-                <span className="text-[10px] text-zinc-500 font-normal mt-0.5 font-sans">{uc.desc}</span>
+                <span className={`text-[10px] font-normal mt-0.5 font-sans ${primaryUseCase === uc.id ? 'text-[#533afd]/80' : 'text-[#64748d]'}`}>{uc.desc}</span>
               </button>
             ))}
           </div>
@@ -229,10 +229,10 @@ export default function AuditForm({ onSubmit, isLoading }: AuditFormProps) {
       {/* Tool Spend Entries */}
       <div className="space-y-4">
         <div className="flex justify-between items-center px-1">
-          <h3 className="text-base font-bold text-zinc-200 font-sans flex items-center gap-2">
+          <h3 className="text-base font-bold text-[#0d253d] font-sans flex items-center gap-2">
             <span>🛠️</span> AI Tools & Monthly Subscriptions
           </h3>
-          <span className="text-xs font-mono font-semibold text-zinc-400 bg-zinc-800 border border-zinc-700 px-3 py-1 rounded-full">
+          <span className="text-xs font-mono font-semibold text-[#273951] bg-[#f6f9fc] border border-[#e3e8ee] px-3 py-1 rounded-full">
             {tools.length} / 15 Added
           </span>
         </div>
@@ -255,7 +255,7 @@ export default function AuditForm({ onSubmit, isLoading }: AuditFormProps) {
           <button
             type="button"
             onClick={handleAddTool}
-            className="w-full flex items-center justify-center gap-2 border border-dashed border-zinc-800 hover:border-zinc-700 bg-zinc-950/30 hover:bg-zinc-900/30 text-zinc-400 hover:text-zinc-200 font-semibold py-4 px-4 rounded-2xl cursor-pointer transition-all duration-300"
+            className="w-full flex items-center justify-center gap-2 border border-dashed border-[#a8c3de] hover:border-[#533afd] bg-white hover:bg-[#f6f9fc] text-[#64748d] hover:text-[#533afd] font-semibold py-4 px-4 rounded-xl cursor-pointer transition-all duration-200"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -263,7 +263,7 @@ export default function AuditForm({ onSubmit, isLoading }: AuditFormProps) {
               viewBox="0 0 24 24"
               strokeWidth={2.5}
               stroke="currentColor"
-              className="w-5 h-5 text-zinc-500 transition-colors"
+              className="w-5 h-5 text-zinc-400 transition-colors"
             >
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
             </svg>
@@ -274,7 +274,7 @@ export default function AuditForm({ onSubmit, isLoading }: AuditFormProps) {
 
       {/* Error Alert */}
       {error && (
-        <div className="flex items-center gap-3 p-4 rounded-xl bg-red-950/30 border border-red-900/50 text-red-400 text-sm font-medium animate-pulse-subtle">
+        <div className="flex items-center gap-3 p-4 rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm font-semibold animate-pulse-subtle">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -298,7 +298,7 @@ export default function AuditForm({ onSubmit, isLoading }: AuditFormProps) {
         <button
           type="submit"
           disabled={isLoading}
-          className={`w-full sm:w-auto min-w-[240px] flex items-center justify-center gap-2.5 bg-gradient-to-r from-[#D946EF] to-[#A21CAF] hover:from-[#C026D3] hover:to-[#8B1D9F] text-white font-bold py-4 px-10 rounded-full shadow-[0_0_35px_rgba(217,70,239,0.3)] hover:shadow-[0_0_50px_rgba(217,70,239,0.45)] cursor-pointer transition-all duration-300 text-base focus:outline-none hover:-translate-y-0.5 ${
+          className={`w-full sm:w-auto min-w-[240px] flex items-center justify-center gap-2.5 bg-[#533afd] hover:bg-[#4434d4] active:bg-[#2e2b8c] text-white font-semibold py-4 px-10 rounded-full shadow-sm hover:shadow-md cursor-pointer transition-all duration-150 text-base focus:outline-none hover:-translate-y-0.5 ${
             isLoading ? 'opacity-70 cursor-not-allowed' : ''
           }`}
         >
@@ -346,4 +346,3 @@ export default function AuditForm({ onSubmit, isLoading }: AuditFormProps) {
     </form>
   );
 }
-
